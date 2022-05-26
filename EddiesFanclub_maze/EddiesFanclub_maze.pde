@@ -16,7 +16,7 @@ void setupWalls(String[][] parsed, int scale){
       (new Wall(x*scale, y*scale, scale)).draw();
     }
     else if(parsed[y][x].equals(".")){
-      (new Target(x*scale + scale/2, y*scale + scale/2, scale)).draw();
+      (new Target(x*scale + scale/2, y*scale + scale/2, scale/2)).draw();
     } else if(parsed[y][x].equals("*")){
       (new Box(x*scale, y*scale, scale)).draw();      
     }
