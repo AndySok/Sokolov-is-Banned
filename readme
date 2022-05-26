@@ -1,0 +1,13 @@
+Eddie's Fanclub :: Ziying Jian, Andrey Sokolov, Joshua Gao
+APCS pd08
+HW105 -- 'Tis Hard to Search for 'Processing'
+2022-05-19
+time spent: 1 hrs
+
+WHAT THIS DEMO SHOWS:
+* System of classes which can be used in Processing
+* Our very own subclass! (which will be used in the final project)
+
+WHY YOU CARE
+* Baby steps, but it shows that we know how to RTFM
+* The walls class will be later amended to be an implementation of a "thing" interface, which will be much cooler
