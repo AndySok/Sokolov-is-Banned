@@ -1,9 +1,9 @@
-class Wall{
+class Box {
   
  color Color; float x; float y; int scale;
   
- Wall(float x, float y, int scale){
-   Color = color(183, 116, 8);
+ Box(float x, float y, int scale){
+   Color = color(98, 26, 165);
    this.x = x;
    this.y = y;
    this.scale = scale;

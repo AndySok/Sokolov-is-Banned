@@ -1,9 +1,9 @@
-class Wall{
+class Target{
   
  color Color; float x; float y; int scale;
   
- Wall(float x, float y, int scale){
-   Color = color(183, 116, 8);
+ Target(float x, float y, int scale){
+   Color = color(255, 19, 19);
    this.x = x;
    this.y = y;
    this.scale = scale;
@@ -11,7 +11,7 @@ class Wall{
  
  void draw(){
    fill(Color);
-   rect(this.x, this.y, scale, scale);
+   circle(this.x, this.y, scale/2);
  }
  
 }

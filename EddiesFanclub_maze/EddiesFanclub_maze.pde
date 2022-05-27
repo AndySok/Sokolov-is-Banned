@@ -4,12 +4,13 @@ import java.util.Arrays;
 
 void setup(){
  size(700, 700);
- String[][] parsed = parseFile("Level2");
+ String[][] parsed = parseFile("LevelSample");
  int scale = 30;
- setupWalls(parsed, scale);
+ setupMap(parsed, scale);
 }
 
-void setupWalls(String[][] parsed, int scale){
+void setupMap(String[][] parsed, int scale){
+  
   for(int y = 0; y < parsed.length; y++){
   for(int x = 0; x < parsed[y].length; x++){
     if(parsed[y][x].equals("X")){
@@ -20,10 +21,14 @@ void setupWalls(String[][] parsed, int scale){
     } else if(parsed[y][x].equals("*")){
       (new Box(x*scale, y*scale, scale)).draw();      
     }
+    else if (parsed[y][x].equals("@")){
+      (new Player(x*scale, y*scale, scale)).draw();
   }
+ }  
  }
+ 
+} // end method
 
-}
 
 //PRECONDITION: file follows the right format
 String[][] parseFile(String fileLocation) {
