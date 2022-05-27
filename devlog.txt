@@ -4,8 +4,7 @@ Ziying Jian
 Andrey Sokolov
 pd 8
 ---------------------
-Sokolov is Banned: a Sokoban in Processing proposal
-
+Sokolov is Banned: a Sokoban in Processing 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 USAGE
 
@@ -57,10 +56,14 @@ tales of wisdom gained...
     \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
 ==============================================================
 
+2022-05-24
+--------------------------------------------------------------
+Andrey & Ziying :: Creating a Wall object + Starting parsing
+==============================================================
 
 2022-05-26
 --------------------------------------------------------------
-Andrey & Ziying :: Parsing! && a Wall + Target Object
+Andrey & Ziying :: Parsing completed! && a Box + Target Object
 ==============================================================
 
 yyyy-mm-dd
