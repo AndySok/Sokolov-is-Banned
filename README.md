@@ -3,10 +3,8 @@ a.k.a sokoban
 # Roster
 Joshua Gao, Ziying Jian, Andrey Sokolov
 
-# WHAT THIS DEMO SHOWS:
-* System of classes which can be used in Processing
-* Our very own subclass! (which will be used in the final project)
+# PROJECT DESCRIPTION
+Sokolov is Banned is based on the Sokoban game. It consists of a grid-based maze with boxes littered throughout. The user can control a sprite that can move these boxes to a red target. The objective of this game is to move all boxes onto the target without running out of moves.
 
-# WHY YOU CARE
-* Baby steps, but it shows that we know how to RTFM
-* The walls class will be later amended to be an implementation of a "thing" interface, which will be much cooler
+# HOW TO LAUNCH
+Coming soon...
