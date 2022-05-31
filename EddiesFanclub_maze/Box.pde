@@ -1,17 +1,15 @@
-class Box {
-  
- color Color; float x; float y; int scale;
-  
+class Box extends Object{
  Box(float x, float y, int scale){
-   Color = color(98, 26, 165);
-   this.x = x;
-   this.y = y;
-   this.scale = scale;
+   super(x, y, scale, color(98, 26, 165));
  }
  
  void draw(){
    fill(Color);
    rect(this.x, this.y, scale, scale);
+ }
+ 
+ String getType(){
+   return "BOX";
  }
  
 }

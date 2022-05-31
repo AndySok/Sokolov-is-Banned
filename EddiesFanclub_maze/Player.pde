@@ -3,10 +3,10 @@ class Player{
  color Color; float x; float y; int scale; 
  
  Player(float x, float y, int scale){
-   Color = color(32, 194, 32);
-   this.x = x;
-   this.y = y;
-   this.scale = scale;
+    this.x = x;
+    this.y = y;
+    this.scale = scale;
+    this.Color = color(32, 194, 32);
  }
  
  void draw(){
@@ -22,4 +22,7 @@ class Player{
    return (int)this.y / scale; 
  }
  
+ String getType(){
+   return "PLAYER"; 
+ }
 }
