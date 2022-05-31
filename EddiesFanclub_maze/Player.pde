@@ -14,13 +14,12 @@ class Player{
    rect(this.x, this.y, scale, scale);
  }
  
- void keyPressed(){
-   if (key == 'a'){
-    fill(255);
-   } else if (key == 'd'){
-     fill(0);
-   }
+ int getX(){
+   return (int)this.x / scale; 
  }
  
+ int getY(){
+   return (int)this.y / scale; 
+ }
  
 }
