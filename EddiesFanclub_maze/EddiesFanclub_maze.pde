@@ -39,38 +39,73 @@ void keyPressed(){
   switch(direction){
     case "up":
       newPosition = parsed[player.getY()-1][player.getX()];
-      if(newPosition != null && !(newPosition.equals(WALL)) && !(newPosition.equals(BOX))){
-        String temp = oldPosition;
-        parsed[player.getY()][player.getX()] = parsed[player.getY()-1][player.getX()];
-        parsed[player.getY()-1][player.getX()] = temp; //WEIRD
+      if(notNullorWall(newPosition)){
+        if(oldPosition.equals("P")){
+          swap("up", ".", "@");
+        }
+        else if(!(newPosition.equals(BOX))){
+          println("UP");
+          swap("up", "@", " ");
+        } else if(newPosition.equals(TARGET)){
+          swap("up", "@", "P");
+        }
       }
       break;
     case "left":
       newPosition = parsed[player.getY()][player.getX()-1];
-      if(newPosition != null && !(newPosition.equals(WALL)) && !(newPosition.equals(BOX))){
-        String temp = oldPosition;
-        parsed[player.getY()][player.getX()] = parsed[player.getY()][player.getX()-1];
-        parsed[player.getY()][player.getX()-1] = temp; //WEIRD
+      if(notNullorWall(newPosition)){
+        if(!(newPosition.equals(BOX))){
+          println("LEFT");
+          swap("left", "@", " ");
+        }
       }
       break;
     case "down":
       newPosition = parsed[player.getY()+1][player.getX()];
-      if(newPosition != null && !(newPosition.equals(WALL)) && !(newPosition.equals(BOX))){
-        String temp = oldPosition;
-        parsed[player.getY()][player.getX()] = parsed[player.getY()+1][player.getX()];
-        parsed[player.getY()+1][player.getX()] = temp; //WEIRD
+      if(notNullorWall(newPosition)){
+        if(oldPosition.equals("P")){
+          swap("down", "@", ".");
+        }
+        else if(!(newPosition.equals(BOX))){
+          swap("down", "@", " ");
+        }
       }
       break;
     case "right":
       newPosition = parsed[player.getY()][player.getX()+1];
-      if(newPosition != null && !(newPosition.equals(WALL)) && !(newPosition.equals(BOX))){
-        String temp = oldPosition;
-        parsed[player.getY()][player.getX()] = parsed[player.getY()][player.getX()+1];
-        parsed[player.getY()][player.getX()+1] = temp; //WEIRD
+      if(notNullorWall(newPosition)){
+        if(!(newPosition.equals(BOX))){
+          swap("right", "@", " ");
+        }
       }
       break;
     }     
   }
+
+boolean notNullorWall(String spot){
+  return (spot != null && !spot.equals(WALL));
+}
+
+void swap(String type, String oldPosition, String newPosition){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
+  switch(type){
+    case "up":
+      parsed[player.getY()][player.getX()] = newPosition;
+      parsed[player.getY()-1][player.getX()] = oldPosition; //WEIRD
+      return;
+    case "left":
+      parsed[player.getY()][player.getX()] = newPosition;
+      parsed[player.getY()][player.getX()-1] = oldPosition; //WEIRD
+      return;
+    case "down":
+      parsed[player.getY()][player.getX()] = newPosition;
+      parsed[player.getY()+1][player.getX()] = oldPosition; //WEIRD
+      return;
+    case "right":
+      parsed[player.getY()][player.getX()] = newPosition;
+      parsed[player.getY()][player.getX()+1] = oldPosition; //WEIRD
+      return;
+  }
+}
 
 void draw(){
  background(255);
@@ -93,6 +128,11 @@ void setupMap(String[][] parsed, int scale){
        case "@":
         player = new Player(x*scale, y*scale, scale);
         player.draw();        
+        break;
+       case "T":
+        break;
+       case "P":
+        player.draw();
         break;
       }
     }
