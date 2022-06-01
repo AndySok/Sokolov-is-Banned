@@ -24,9 +24,9 @@ Flesh out each category whenever necessary, appropriate.
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-uml diagram
 collision system
 game loop
+keyPressed not registering in player movement
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,7 +34,7 @@ UNRESOLVED ISSUES
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-parsed a map!
+Parsed a map!
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,9 +66,7 @@ Andrey & Ziying :: Creating a Wall object + Starting parsing
 Andrey & Ziying :: Parsing completed! && a Box + Target Object
 ==============================================================
 
-yyyy-mm-dd
+2022-05-31
 --------------------------------------------------------------
-<Member> :: <Thing member did.>
-<Member> :: <Thing member did.>
-<Member> :: <Thing member did.>
+Everyone :: Player moves in all directions
 ==============================================================
