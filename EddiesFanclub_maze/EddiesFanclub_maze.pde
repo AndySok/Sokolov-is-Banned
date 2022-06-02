@@ -8,6 +8,7 @@ String WALL = "X";
 String BOX = "*";
 String TARGET = ".";
 String PLAYERTARGET = "P";
+String BOXTARGET = "T";
 int scale;
 
 void setup(){
@@ -43,12 +44,14 @@ void keyPressed(){
     case "up":
       newPosition = parsed[player.getY()-1][player.getX()];
       if(notNullorWall(newPosition)){
-        println("UP");
+//        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){
           swap("up", "@", ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap("up", "P", " ");
-        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
+        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+          println("PUSHUP");
+        } else if(playerAtOld(oldPosition)){
           swap("up", "@", " ");
         }
       }
@@ -56,12 +59,14 @@ void keyPressed(){
     case "left":
       newPosition = parsed[player.getY()][player.getX()-1];
       if(notNullorWall(newPosition)){
-        println("LEFT");
+//        println("LEFT");
         if((oldPosition.equals(PLAYERTARGET))){
           swap("left", "@", ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap("left", "P", " ");
-        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
+        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+          println("PUSHLEFT");
+        } else if(playerAtOld(oldPosition)){
           swap("left", "@", " ");
         }
       }
@@ -69,12 +74,14 @@ void keyPressed(){
     case "down":
       newPosition = parsed[player.getY()+1][player.getX()];
       if(notNullorWall(newPosition)){
-        println("DOWN");
+//        println("DOWN");
         if(oldPosition.equals(PLAYERTARGET)){
           swap("down", "@", ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap("down", "P", " ");
-        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
+        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+          println("PUSHDOWN");
+        } else if(playerAtOld(oldPosition)){
           swap("down", "@", " ");
         }
       }
@@ -82,12 +89,14 @@ void keyPressed(){
     case "right":
       newPosition = parsed[player.getY()][player.getX()+1];
       if(notNullorWall(newPosition)){
-        println("RIGHT");
+//        println("RIGHT");
         if((oldPosition.equals(PLAYERTARGET))){
           swap("right", "@", ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap("right", "P", " ");
-        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
+        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+          println("PUSHRIGHT");
+        } else if(playerAtOld(oldPosition)){
           swap("right", "@", " ");
         }
       }
