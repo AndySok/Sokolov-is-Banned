@@ -18,6 +18,11 @@ void setup(){
  setupMap(parsed, scale);
 }
 
+void draw(){
+ background(255);
+ setupMap(parsed, scale);
+}
+
 void keyPressed(){
    switch(key){
     case 'w':
@@ -104,14 +109,6 @@ void keyPressed(){
     }     
   }
 
-boolean notNullorWall(String spot){
-  return (spot != null && !spot.equals(WALL));
-}
-
-boolean playerAtOld(String position){
-  return position.equals("@");
-}
-
 void swap(String type, String oldPosition, String newPosition){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
   switch(type){
     case "up":
@@ -131,11 +128,6 @@ void swap(String type, String oldPosition, String newPosition){ //swap the given
       parsed[player.getY()][player.getX()+1] = oldPosition; //WEIRD
       return;
   }
-}
-
-void draw(){
- background(255);
- setupMap(parsed, scale);
 }
 
 void setupMap(String[][] parsed, int scale){
@@ -166,6 +158,15 @@ void setupMap(String[][] parsed, int scale){
     }
    }
  } // end method
+ 
+//BOOLEAN METHODS
+boolean notNullorWall(String spot){
+  return (spot != null && !spot.equals(WALL));
+}
+
+boolean playerAtOld(String position){
+  return position.equals("@");
+}
 
 //PRECONDITION: file follows the right format
 String[][] parseFile(String fileLocation) {
