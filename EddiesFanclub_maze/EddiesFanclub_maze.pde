@@ -7,6 +7,7 @@ String[][] parsed;
 String WALL = "X";
 String BOX = "*";
 String TARGET = ".";
+String PLAYERTARGET = "P";
 int scale;
 
 void setup(){
@@ -31,6 +32,8 @@ void keyPressed(){
       move("right");
       break;
    }
+   println(Arrays.toString(parsed[1]));
+   println(Arrays.toString(parsed[2]));
  }
 
  void move(String direction){
@@ -40,22 +43,25 @@ void keyPressed(){
     case "up":
       newPosition = parsed[player.getY()-1][player.getX()];
       if(notNullorWall(newPosition)){
-        if(oldPosition.equals("P")){
-          swap("up", ".", "@");
-        }
-        else if(!(newPosition.equals(BOX))){
-          println("UP");
+        println("UP");
+        if(oldPosition.equals(PLAYERTARGET)){
+          swap("up", "@", ".");
+        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
+          swap("up", "P", " ");
+        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
           swap("up", "@", " ");
-        } else if(newPosition.equals(TARGET)){
-          swap("up", "@", "P");
         }
       }
       break;
     case "left":
       newPosition = parsed[player.getY()][player.getX()-1];
       if(notNullorWall(newPosition)){
-        if(!(newPosition.equals(BOX))){
-          println("LEFT");
+        println("LEFT");
+        if((oldPosition.equals(PLAYERTARGET))){
+          swap("left", "@", ".");
+        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
+          swap("left", "P", " ");
+        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
           swap("left", "@", " ");
         }
       }
@@ -63,10 +69,12 @@ void keyPressed(){
     case "down":
       newPosition = parsed[player.getY()+1][player.getX()];
       if(notNullorWall(newPosition)){
-        if(oldPosition.equals("P")){
+        println("DOWN");
+        if(oldPosition.equals(PLAYERTARGET)){
           swap("down", "@", ".");
-        }
-        else if(!(newPosition.equals(BOX))){
+        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
+          swap("down", "P", " ");
+        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
           swap("down", "@", " ");
         }
       }
@@ -74,7 +82,12 @@ void keyPressed(){
     case "right":
       newPosition = parsed[player.getY()][player.getX()+1];
       if(notNullorWall(newPosition)){
-        if(!(newPosition.equals(BOX))){
+        println("RIGHT");
+        if((oldPosition.equals(PLAYERTARGET))){
+          swap("right", "@", ".");
+        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
+          swap("right", "P", " ");
+        } else if(!(newPosition.equals(BOX)) && playerAtOld(oldPosition)){
           swap("right", "@", " ");
         }
       }
@@ -84,6 +97,10 @@ void keyPressed(){
 
 boolean notNullorWall(String spot){
   return (spot != null && !spot.equals(WALL));
+}
+
+boolean playerAtOld(String position){
+  return position.equals("@");
 }
 
 void swap(String type, String oldPosition, String newPosition){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
@@ -123,20 +140,22 @@ void setupMap(String[][] parsed, int scale){
         (new Target(x*scale + scale/2, y*scale + scale/2, scale/2)).draw();
         break;
        case "*":
-        (new Box(x*scale, y*scale, scale)).draw();
+        (new Box(x*scale, y*scale, scale, 0)).draw();
         break;
        case "@":
         player = new Player(x*scale, y*scale, scale);
         player.draw();        
         break;
        case "T":
+        (new Box(x*scale, y*scale, scale, 1)).draw();
         break;
        case "P":
+        player = new Player(x*scale, y*scale, scale);
         player.draw();
         break;
       }
     }
-   }  
+   }
  } // end method
 
 //PRECONDITION: file follows the right format
