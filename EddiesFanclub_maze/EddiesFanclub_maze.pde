@@ -38,8 +38,9 @@ void keyPressed(){
       move("right");
       break;
    }
-//   println(Arrays.toString(parsed[1]));
-//   println(Arrays.toString(parsed[2]));
+   println(Arrays.toString(parsed[1]));
+   println(Arrays.toString(parsed[2]));
+   println(Arrays.toString(parsed[3]));
  }
 
  void move(String direction){
@@ -51,13 +52,14 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){
-          swap("up", "@", ".");
+          swap("up", player.getY(), player.getX(), "@", player.getY()-1, player.getX(), ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-          swap("up", "P", " ");
+          swap("up", player.getY(), player.getX(), "P", player.getY()-1, player.getX(), " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+          push("up");
           println("PUSHUP");
         } else if(playerAtOld(oldPosition)){
-          swap("up", "@", " ");
+          swap("up", player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
         }
       }
       break;
@@ -109,23 +111,52 @@ void keyPressed(){
     }     
   }
 
-void swap(String type, String oldPosition, String newPosition){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
+void swap(String type, int oldY, int oldX, String oldPositionChar, int newY, int newX, String newPositionChar){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
   switch(type){
     case "up":
-      parsed[player.getY()][player.getX()] = newPosition;
-      parsed[player.getY()-1][player.getX()] = oldPosition; //WEIRD
+      parsed[oldY][oldX] = newPositionChar;
+      parsed[newY][newX] = oldPositionChar; //WEIRD
       return;
     case "left":
-      parsed[player.getY()][player.getX()] = newPosition;
-      parsed[player.getY()][player.getX()-1] = oldPosition; //WEIRD
+      parsed[player.getY()][player.getX()] = newPositionChar;
+      parsed[player.getY()][player.getX()-1] = oldPositionChar; //WEIRD
       return;
     case "down":
-      parsed[player.getY()][player.getX()] = newPosition;
-      parsed[player.getY()+1][player.getX()] = oldPosition; //WEIRD
+      parsed[player.getY()][player.getX()] = newPositionChar;
+      parsed[player.getY()+1][player.getX()] = oldPositionChar; //WEIRD
       return;
     case "right":
-      parsed[player.getY()][player.getX()] = newPosition;
-      parsed[player.getY()][player.getX()+1] = oldPosition; //WEIRD
+      parsed[player.getY()][player.getX()] = newPositionChar;
+      parsed[player.getY()][player.getX()+1] = oldPositionChar; //WEIRD
+      return;
+  }
+}
+
+void push(String type){
+  String boxPosition, newBoxPosition;
+  switch(type){
+    case "up":
+      boxPosition = parsed[player.getY()-1][player.getX()];
+      newBoxPosition = parsed[player.getY()-2][player.getX()];
+      if(notNullorWall(newBoxPosition)){
+        if(boxPosition.equals(BOXTARGET)){
+          swap("up", "T", ".");
+        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+          swap("up", "T", " ");
+        } else if(boxAtOld(boxPosition)){
+          swap("up", "*", " ");
+        }
+      }    
+      return;
+    case "left":
+    
+      return;
+    case "down":
+    
+      return;
+      
+    case "right":
+    
       return;
   }
 }
@@ -166,6 +197,10 @@ boolean notNullorWall(String spot){
 
 boolean playerAtOld(String position){
   return position.equals("@");
+}
+
+boolean boxAtOld(String position){
+  return position.equals("*");
 }
 
 //PRECONDITION: file follows the right format
