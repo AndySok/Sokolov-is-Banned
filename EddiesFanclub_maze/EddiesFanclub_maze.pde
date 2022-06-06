@@ -17,9 +17,9 @@ int scale;
 
 void setup(){
  size(700, 700);
- parsed = parseFile("LevelOne");
+ parsed = parseFile("BetterLevelOne");
  originalParsed = dupliKate(parsed);
- scale = 40;
+ scale = 30;
  setupMap(parsed, scale);
 }
 
@@ -63,7 +63,11 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){
-          swap(player.getY(), player.getX(), "@", player.getY()-1, player.getX(), ".");
+          if(newPosition.equals(TARGET)){
+            swap(player.getY(), player.getX(), "P", player.getY()-1, player.getX(), ".");            
+          } else{
+            swap(player.getY(), player.getX(), "@", player.getY()-1, player.getX(), ".");
+          }
         } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
             if(push("up")){
               swap(player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
@@ -80,7 +84,11 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("LEFT");
         if((oldPosition.equals(PLAYERTARGET))){
-          swap(player.getY(), player.getX(), "@", player.getY(), player.getX()-1, ".");
+          if(newPosition.equals(TARGET)){
+            swap(player.getY(), player.getX(), "P", player.getY(), player.getX()-1, ".");            
+          } else{
+            swap(player.getY(), player.getX(), "@", player.getY(), player.getX()-1, ".");
+          }
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY(), player.getX()-1, " ");
         } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
@@ -97,7 +105,11 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("DOWN");
         if(oldPosition.equals(PLAYERTARGET)){
-          swap(player.getY(), player.getX(), "@", player.getY()+1, player.getX(), ".");
+          if(newPosition.equals(TARGET)){
+            swap(player.getY(), player.getX(), "P", player.getY()+1, player.getX(), ".");            
+          } else{
+            swap(player.getY(), player.getX(), "@", player.getY()+1, player.getX(), ".");
+          }
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY()+1, player.getX(), " ");
         } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
@@ -114,7 +126,11 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("RIGHT");
         if((oldPosition.equals(PLAYERTARGET))){
-          swap(player.getY(), player.getX(), "@", player.getY(), player.getX()+1, ".");
+          if(newPosition.equals(TARGET)){
+            swap(player.getY(), player.getX(), "P", player.getY(), player.getX()+1, ".");            
+          } else{
+            swap(player.getY(), player.getX(), "@", player.getY(), player.getX()+1, ".");
+          }
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY(), player.getX()+1, " ");
         } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
