@@ -18,6 +18,7 @@ int scale;
 void setup(){
  size(700, 700);
  parsed = parseFile("LevelOne");
+ originalParsed = dupliKate(parsed);
  scale = 40;
  setupMap(parsed, scale);
 }
@@ -45,8 +46,8 @@ void keyPressed(){
       break;
     case ' ':
       println("RESTART!");
-      parsed = originalParsed;
-      
+      parsed = dupliKate(originalParsed);
+      //originalParsed
       break;
    }
 //   println(Arrays.toString(parsed[1]));
@@ -253,13 +254,13 @@ String[][] parseFile(String fileLocation) {
     return parsed;
 }
 
-String[][] dupliKate(String[][] original, String[][] copy){
-    copy = new String[original.length][original[0].length];
+String[][] dupliKate(String[][] original){
+    String[][] copy = new String[original.length][original[0].length];
     for(int y = 0; y < original.length; y++){
       for(int x = 0; x < original[y].length; x++){
-        cope[y][x] = original[y][x];
+        copy[y][x] = original[y][x];
       }
-    }  
+    } return copy; 
 }
 
 LinkedList parse(){
