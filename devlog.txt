@@ -4,7 +4,7 @@ Ziying Jian
 Andrey Sokolov
 pd 8
 ---------------------
-Sokolov is Banned: a Sokoban in Processing 
+Sokolov is Banned: a Sokoban in Processing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 USAGE
 
@@ -24,9 +24,11 @@ Flesh out each category whenever necessary, appropriate.
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-collision system
-game loop
-keyPressed not registering in player movement
+1. keyPressed not registering in player movement
+   draw() must re-parse the map every frame
+2. Pressing two direction keys at the same time would clone the player
+    Added a boolean statement that must also check if the player remains in
+    the same position
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,11 +36,13 @@ UNRESOLVED ISSUES
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Parsed a map!
+1. How to parse a map -- requires double for loops and storing every index into
+a double String array
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<>
+1. Decided to instate a leaderboard through using stacks
+2. Connecting maps using linked lists
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,13 +51,13 @@ tales of wisdom gained...
 
 
 
- ______   ______   __   __   __       ______   _______     
-/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
-\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
- \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
-  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
-   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
-    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+ ______   ______   __   __   __       ______   _______
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/
 ==============================================================
 
 2022-05-24
@@ -69,4 +73,15 @@ Andrey & Ziying :: Parsing completed! && a Box + Target Object
 2022-05-31
 --------------------------------------------------------------
 Everyone :: Player moves in all directions
+==============================================================
+
+2022-06-01
+--------------------------------------------------------------
+Andrey and Ziying :: Discovered a bug that would clone the player
+if two direction keys were pressed at the same time
+==============================================================
+
+2022-06-02
+--------------------------------------------------------------
+Andrey and Ziying :: Fixed the bug
 ==============================================================

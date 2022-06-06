@@ -106,7 +106,7 @@ void keyPressed(){
         }
       }
       break;
-    }     
+    }
   }
 
 void swap(String type, String oldPosition, String newPosition){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
@@ -145,7 +145,7 @@ void setupMap(String[][] parsed, int scale){
         break;
        case "@":
         player = new Player(x*scale, y*scale, scale);
-        player.draw();        
+        player.draw();
         break;
        case "T":
         (new Box(x*scale, y*scale, scale, 1)).draw();
@@ -158,7 +158,7 @@ void setupMap(String[][] parsed, int scale){
     }
    }
  } // end method
- 
+
 //BOOLEAN METHODS
 boolean notNullorWall(String spot){
   return (spot != null && !spot.equals(WALL));
@@ -178,4 +178,4 @@ String[][] parseFile(String fileLocation) {
         lines[y] = lines[y].substring(1);
       }
     } return parsed;
-} 
+}
