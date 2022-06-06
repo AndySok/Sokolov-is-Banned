@@ -8,7 +8,7 @@ Sokolov is Banned is based on the Sokoban game. It consists of a grid-based maze
 
 # HOW TO LAUNCH
 1. Clone this repository onto your machine by pasting this in your terminal:
-  ```git clone git@github.com:AndySok/Sokolov-is-Banned.git```
+  ```git clone git@github.com:AndySok/Sokolov-is-Banned.git```  
 2. Go into the Sokolov-is-Banned
-  ```cd Sokolov-is-Banned```
+  ```cd Sokolov-is-Banned```  
 3. Open Processing and navigate to opening EddiesFanclub_maze.pde
