@@ -53,13 +53,12 @@ void keyPressed(){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){
           swap(player.getY(), player.getX(), "@", player.getY()-1, player.getX(), ".");
+        } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
+            if(push("up")){
+              swap(player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
+            }
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-          swap(player.getY(), player.getX(), "P", player.getY()-1, player.getX(), " ");
-        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
-          if(push("up")){
-            swap(player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
-          }
-          println("PUSHUP");
+            swap(player.getY(), player.getX(), "P", player.getY()-1, player.getX(), " ");
         } else if(playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
         }
@@ -74,7 +73,9 @@ void keyPressed(){
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY(), player.getX()-1, " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
-          println("PUSHLEFT");
+          if(push("left")){
+            swap(player.getY(), player.getX(), "@",  player.getY(), player.getX()-1, " ");
+          }
         } else if(playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "@", player.getY(), player.getX()-1, " ");
         }
@@ -89,7 +90,9 @@ void keyPressed(){
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY()+1, player.getX(), " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
-          println("PUSHDOWN");
+          if(push("down")){
+            swap(player.getY(), player.getX(), "@",  player.getY()+1, player.getX(), " ");
+          }
         } else if(playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "@", player.getY()+1, player.getX(), " ");
         }
@@ -104,7 +107,9 @@ void keyPressed(){
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY(), player.getX()+1, " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
-          println("PUSHRIGHT");
+          if(push("right")){
+            swap(player.getY(), player.getX(), "@",  player.getY(), player.getX()+1, " ");
+          }
         } else if(playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "@", player.getY(), player.getX()+1, " ");
         }
@@ -131,21 +136,20 @@ boolean push(String type){
           swap(boxPositionY, boxPositionX, "*", boxPositionY-1, boxPositionX, " ");
         }
         return true;
-      } return false;   
+      } return false;
     case "left":
       boxPositionY = player.getY();
       boxPositionX = player.getX()-1;
       boxPosition = parsed[boxPositionY][boxPositionX];
-      newBoxPosition = parsed[boxPositionY-1][boxPositionX];
+      newBoxPosition = parsed[boxPositionY][boxPositionX-1];
       if(notNullorWall(newBoxPosition)){
         if(boxPosition.equals(BOXTARGET)){
-          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, ".");
+          swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX-1, ".");
         } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
-          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, " ");
+          swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX-1, " ");
         } else if(boxAtOld(boxPosition)){
-          swap(boxPositionY, boxPositionX, "*", boxPositionY-1, boxPositionX, " ");
-        }
-        return true;
+          swap(boxPositionY, boxPositionX, "*", boxPositionY, boxPositionX-1, " ");
+        } return true;
       } return false;
 //      return;
 //    case "down":    
