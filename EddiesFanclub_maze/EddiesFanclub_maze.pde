@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 Player player;
 //LinkedList<String[][]> levels = parse();
+String[][] originalParsed;
 String STATE = "START";
 String[][] parsed;
 String WALL = "X";
@@ -16,7 +17,7 @@ int scale;
 
 void setup(){
  size(700, 700);
- parsed = parseFile("LevelSample");
+ parsed = parseFile("LevelOne");
  scale = 40;
  setupMap(parsed, scale);
 }
@@ -41,6 +42,11 @@ void keyPressed(){
       break;
     case 'd':
       move("right");
+      break;
+    case ' ':
+      println("RESTART!");
+      parsed = originalParsed;
+      
       break;
    }
 //   println(Arrays.toString(parsed[1]));
@@ -132,7 +138,7 @@ boolean push(String type){
       boxPositionX = player.getX();
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY-1][boxPositionX];
-      if(notNullorWall(newBoxPosition)){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
         if(boxPosition.equals(BOXTARGET)){
           swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, ".");
         } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
@@ -147,7 +153,7 @@ boolean push(String type){
       boxPositionX = player.getX()-1;
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY][boxPositionX-1];
-      if(notNullorWall(newBoxPosition)){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
         if(boxPosition.equals(BOXTARGET)){
           swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX-1, ".");
         } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
@@ -161,7 +167,7 @@ boolean push(String type){
       boxPositionX = player.getX();
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY+1][boxPositionX];
-      if(notNullorWall(newBoxPosition)){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
         if(boxPosition.equals(BOXTARGET)){
           swap(boxPositionY, boxPositionX, "T", boxPositionY+1, boxPositionX, ".");
         } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
@@ -175,7 +181,7 @@ boolean push(String type){
       boxPositionX = player.getX()+1;
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY][boxPositionX+1];
-      if(notNullorWall(newBoxPosition)){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
         if(boxPosition.equals(BOXTARGET)){
           swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX+1, ".");
         } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
@@ -243,7 +249,17 @@ String[][] parseFile(String fileLocation) {
         parsed[y][x] = lines[y].substring(0, 1);
         lines[y] = lines[y].substring(1);
       }
-    } return parsed;
+    }
+    return parsed;
+}
+
+String[][] dupliKate(String[][] original, String[][] copy){
+    copy = new String[original.length][original[0].length];
+    for(int y = 0; y < original.length; y++){
+      for(int x = 0; x < original[y].length; x++){
+        cope[y][x] = original[y][x];
+      }
+    }  
 }
 
 LinkedList parse(){
