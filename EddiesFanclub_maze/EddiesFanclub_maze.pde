@@ -38,9 +38,9 @@ void keyPressed(){
       move("right");
       break;
    }
-   println(Arrays.toString(parsed[1]));
-   println(Arrays.toString(parsed[2]));
-   println(Arrays.toString(parsed[3]));
+//   println(Arrays.toString(parsed[1]));
+//   println(Arrays.toString(parsed[2]));
+//   println(Arrays.toString(parsed[3]));
  }
 
  void move(String direction){
@@ -52,14 +52,16 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){
-          swap("up", player.getY(), player.getX(), "@", player.getY()-1, player.getX(), ".");
+          swap(player.getY(), player.getX(), "@", player.getY()-1, player.getX(), ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-          swap("up", player.getY(), player.getX(), "P", player.getY()-1, player.getX(), " ");
+          swap(player.getY(), player.getX(), "P", player.getY()-1, player.getX(), " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
-          push("up");
+          if(push("up")){
+            swap(player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
+          }
           println("PUSHUP");
         } else if(playerAtOld(oldPosition)){
-          swap("up", player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
+          swap(player.getY(), player.getX(), "@",  player.getY()-1, player.getX(), " ");
         }
       }
       break;
@@ -68,13 +70,13 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("LEFT");
         if((oldPosition.equals(PLAYERTARGET))){
-          swap("left", "@", ".");
+          swap(player.getY(), player.getX(), "@", player.getY(), player.getX()-1, ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-          swap("left", "P", " ");
+          swap(player.getY(), player.getX(), "P", player.getY(), player.getX()-1, " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
           println("PUSHLEFT");
         } else if(playerAtOld(oldPosition)){
-          swap("left", "@", " ");
+          swap(player.getY(), player.getX(), "@", player.getY(), player.getX()-1, " ");
         }
       }
       break;
@@ -83,13 +85,13 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("DOWN");
         if(oldPosition.equals(PLAYERTARGET)){
-          swap("down", "@", ".");
+          swap(player.getY(), player.getX(), "@", player.getY()+1, player.getX(), ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-          swap("down", "P", " ");
+          swap(player.getY(), player.getX(), "P", player.getY()+1, player.getX(), " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
           println("PUSHDOWN");
         } else if(playerAtOld(oldPosition)){
-          swap("down", "@", " ");
+          swap(player.getY(), player.getX(), "@", player.getY()+1, player.getX(), " ");
         }
       }
       break;
@@ -98,67 +100,59 @@ void keyPressed(){
       if(notNullorWall(newPosition)){
 //        println("RIGHT");
         if((oldPosition.equals(PLAYERTARGET))){
-          swap("right", "@", ".");
+          swap(player.getY(), player.getX(), "@", player.getY(), player.getX()+1, ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-          swap("right", "P", " ");
+          swap(player.getY(), player.getX(), "P", player.getY(), player.getX()+1, " ");
         } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
           println("PUSHRIGHT");
         } else if(playerAtOld(oldPosition)){
-          swap("right", "@", " ");
+          swap(player.getY(), player.getX(), "@", player.getY(), player.getX()+1, " ");
         }
       }
       break;
     }     
   }
 
-void swap(String type, int oldY, int oldX, String oldPositionChar, int newY, int newX, String newPositionChar){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
-  switch(type){
-    case "up":
-      parsed[oldY][oldX] = newPositionChar;
-      parsed[newY][newX] = oldPositionChar; //WEIRD
-      return;
-    case "left":
-      parsed[player.getY()][player.getX()] = newPositionChar;
-      parsed[player.getY()][player.getX()-1] = oldPositionChar; //WEIRD
-      return;
-    case "down":
-      parsed[player.getY()][player.getX()] = newPositionChar;
-      parsed[player.getY()+1][player.getX()] = oldPositionChar; //WEIRD
-      return;
-    case "right":
-      parsed[player.getY()][player.getX()] = newPositionChar;
-      parsed[player.getY()][player.getX()+1] = oldPositionChar; //WEIRD
-      return;
-  }
-}
-
-void push(String type){
+boolean push(String type){
   String boxPosition, newBoxPosition;
+  int boxPositionY, boxPositionX;
   switch(type){
     case "up":
-      boxPosition = parsed[player.getY()-1][player.getX()];
-      newBoxPosition = parsed[player.getY()-2][player.getX()];
+      boxPositionY = player.getY()-1;
+      boxPositionX = player.getX();
+      boxPosition = parsed[boxPositionY][boxPositionX];
+      newBoxPosition = parsed[boxPositionY-1][boxPositionX];
       if(notNullorWall(newBoxPosition)){
         if(boxPosition.equals(BOXTARGET)){
-          swap("up", "T", ".");
+          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, ".");
         } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
-          swap("up", "T", " ");
+          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, " ");
         } else if(boxAtOld(boxPosition)){
-          swap("up", "*", " ");
+          swap(boxPositionY, boxPositionX, "*", boxPositionY-1, boxPositionX, " ");
         }
-      }    
-      return;
+        return true;
+      } return false;   
     case "left":
-    
-      return;
-    case "down":
-    
-      return;
-      
-    case "right":
-    
-      return;
-  }
+      boxPositionY = player.getY();
+      boxPositionX = player.getX()-1;
+      boxPosition = parsed[boxPositionY][boxPositionX];
+      newBoxPosition = parsed[boxPositionY-1][boxPositionX];
+      if(notNullorWall(newBoxPosition)){
+        if(boxPosition.equals(BOXTARGET)){
+          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, ".");
+        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, " ");
+        } else if(boxAtOld(boxPosition)){
+          swap(boxPositionY, boxPositionX, "*", boxPositionY-1, boxPositionX, " ");
+        }
+        return true;
+      } return false;
+//      return;
+//    case "down":    
+//      return;      
+//    case "right":    
+//      return;
+  } return false;
 }
 
 void setupMap(String[][] parsed, int scale){
@@ -190,7 +184,7 @@ void setupMap(String[][] parsed, int scale){
    }
  } // end method
  
-//BOOLEAN METHODS
+//HELPER METHODS
 boolean notNullorWall(String spot){
   return (spot != null && !spot.equals(WALL));
 }
@@ -203,6 +197,11 @@ boolean boxAtOld(String position){
   return position.equals("*");
 }
 
+void swap(int oldY, int oldX, String oldPositionChar, int newY, int newX, String newPositionChar){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
+      parsed[oldY][oldX] = newPositionChar;
+      parsed[newY][newX] = oldPositionChar; //WEIRD
+}
+
 //PRECONDITION: file follows the right format
 String[][] parseFile(String fileLocation) {
     String[] lines = loadStrings(fileLocation);
@@ -213,4 +212,4 @@ String[][] parseFile(String fileLocation) {
         lines[y] = lines[y].substring(1);
       }
     } return parsed;
-} 
+}
