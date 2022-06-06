@@ -27,8 +27,10 @@ OBSTACLES OVERCOME
 1. keyPressed not registering in player movement
    draw() must re-parse the map every frame
 2. Pressing two direction keys at the same time would clone the player
-    Added a boolean statement that must also check if the player remains in
-    the same position
+    Added a conditional that must also check if the player is still in the same
+    position
+3. Accounting for four directions each time
+  Fixed by having move() intake parameters and invoking move() with the said params
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,6 +40,8 @@ COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. How to parse a map -- requires double for loops and storing every index into
 a double String array
+2. draw() is an infinite loop
+3. switch-case statements
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,7 +52,9 @@ LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
-
+1. Having one person be the driver and having another person exclusively
+account for devlog, README, and the UML diagram makes logging data and the workflow
+overall much more efficient and NEVER results in merge conflicts!!
 
 
  ______   ______   __   __   __       ______   _______
@@ -90,4 +96,6 @@ Andrey and Ziying :: Fixed the bug that was mentioned previously
 --------------------------------------------------------------
 Andrey and Ziying ::
 - Made the swap method more generalized, taking coordinates as parameters
+- Updated README and the UML diagram
+- Finished the push() method -- box will be moved if the plater moves it
 ==============================================================
