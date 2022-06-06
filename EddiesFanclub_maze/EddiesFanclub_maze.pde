@@ -204,7 +204,7 @@ boolean push(String type){
       boxPositionX = player.getX();
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY-1][boxPositionX];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
         if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, " ");
         } else if(boxAtOld(boxPosition)){ //check if there is a box
@@ -216,7 +216,7 @@ boolean push(String type){
       boxPositionX = player.getX()-1;
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY][boxPositionX-1];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
         if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX-1, " ");
         } else if(boxAtOld(boxPosition)){ //check if there is a box
@@ -228,7 +228,7 @@ boolean push(String type){
       boxPositionX = player.getX();
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY+1][boxPositionX];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
         if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY+1, boxPositionX, " ");
         } else if(boxAtOld(boxPosition)){ //check if there is a box
@@ -240,7 +240,7 @@ boolean push(String type){
       boxPositionX = player.getX()+1;
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY][boxPositionX+1];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
+      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
         if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX+1, " ");
         } else if(boxAtOld(boxPosition)){ //check if there is a box
