@@ -1,8 +1,11 @@
 import java.util.Scanner;
+import java.util.LinkedList;
 import java.io.*;
 import java.util.Arrays;
 
 Player player;
+//LinkedList<String[][]> levels = parse();
+String STATE = "START";
 String[][] parsed;
 String WALL = "X";
 String BOX = "*";
@@ -19,8 +22,10 @@ void setup(){
 }
 
 void draw(){
+  
  background(255);
  setupMap(parsed, scale);
+// checkWin();
 }
 
 void keyPressed(){
@@ -72,7 +77,7 @@ void keyPressed(){
           swap(player.getY(), player.getX(), "@", player.getY(), player.getX()-1, ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY(), player.getX()-1, " ");
-        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+        } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
           if(push("left")){
             swap(player.getY(), player.getX(), "@",  player.getY(), player.getX()-1, " ");
           }
@@ -89,7 +94,7 @@ void keyPressed(){
           swap(player.getY(), player.getX(), "@", player.getY()+1, player.getX(), ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY()+1, player.getX(), " ");
-        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+        } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
           if(push("down")){
             swap(player.getY(), player.getX(), "@",  player.getY()+1, player.getX(), " ");
           }
@@ -106,7 +111,7 @@ void keyPressed(){
           swap(player.getY(), player.getX(), "@", player.getY(), player.getX()+1, ".");
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
           swap(player.getY(), player.getX(), "P", player.getY(), player.getX()+1, " ");
-        } else if(newPosition.equals(BOX) && playerAtOld(oldPosition)){
+        } else if((newPosition.equals(BOX) || newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){
           if(push("right")){
             swap(player.getY(), player.getX(), "@",  player.getY(), player.getX()+1, " ");
           }
@@ -151,11 +156,34 @@ boolean push(String type){
           swap(boxPositionY, boxPositionX, "*", boxPositionY, boxPositionX-1, " ");
         } return true;
       } return false;
-//      return;
-//    case "down":    
-//      return;      
-//    case "right":    
-//      return;
+    case "down":    
+      boxPositionY = player.getY()+1;
+      boxPositionX = player.getX();
+      boxPosition = parsed[boxPositionY][boxPositionX];
+      newBoxPosition = parsed[boxPositionY+1][boxPositionX];
+      if(notNullorWall(newBoxPosition)){
+        if(boxPosition.equals(BOXTARGET)){
+          swap(boxPositionY, boxPositionX, "T", boxPositionY+1, boxPositionX, ".");
+        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+          swap(boxPositionY, boxPositionX, "T", boxPositionY+1, boxPositionX, " ");
+        } else if(boxAtOld(boxPosition)){
+          swap(boxPositionY, boxPositionX, "*", boxPositionY+1, boxPositionX, " ");
+        } return true;
+      } return false;     
+    case "right":    
+      boxPositionY = player.getY();
+      boxPositionX = player.getX()+1;
+      boxPosition = parsed[boxPositionY][boxPositionX];
+      newBoxPosition = parsed[boxPositionY][boxPositionX+1];
+      if(notNullorWall(newBoxPosition)){
+        if(boxPosition.equals(BOXTARGET)){
+          swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX+1, ".");
+        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+          swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX+1, " ");
+        } else if(boxAtOld(boxPosition)){
+          swap(boxPositionY, boxPositionX, "*", boxPositionY, boxPositionX+1, " ");
+        } return true;
+      } return false;
   } return false;
 }
 
@@ -216,4 +244,12 @@ String[][] parseFile(String fileLocation) {
         lines[y] = lines[y].substring(1);
       }
     } return parsed;
+}
+
+LinkedList parse(){
+  LinkedList<String[][]> list = new LinkedList<String[][]>();
+//for(int i=0; i<25; i++){
+//  levels.add(parseFile(i + ".txt");
+//} 
+  return list;
 }
