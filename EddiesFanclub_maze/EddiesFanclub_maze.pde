@@ -164,14 +164,11 @@ boolean push(String type){
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY-1][boxPositionX];
       if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
-        if(boxPosition.equals(BOXTARGET)){
-          swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, ".");
-        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+        if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY-1, boxPositionX, " ");
-        } else if(boxPosition.equals(BOXTARGET) || boxAtOld(boxPosition)){
+        } else if(boxAtOld(boxPosition)){ //check if there is a box
           swap(boxPositionY, boxPositionX, "*", boxPositionY-1, boxPositionX, " ");
-        }
-        return true;
+        } return true;
       } return false;
     case "left":
       boxPositionY = player.getY();
@@ -179,11 +176,9 @@ boolean push(String type){
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY][boxPositionX-1];
       if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
-        if(boxPosition.equals(BOXTARGET)){
-          swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX-1, ".");
-        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+        if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX-1, " ");
-        } else if(boxAtOld(boxPosition)){
+        } else if(boxAtOld(boxPosition)){ //check if there is a box
           swap(boxPositionY, boxPositionX, "*", boxPositionY, boxPositionX-1, " ");
         } return true;
       } return false;
@@ -193,28 +188,24 @@ boolean push(String type){
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY+1][boxPositionX];
       if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
-        if(boxPosition.equals(BOXTARGET)){
-          swap(boxPositionY, boxPositionX, "T", boxPositionY+1, boxPositionX, ".");
-        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+        if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY+1, boxPositionX, " ");
-        } else if(boxAtOld(boxPosition)){
+        } else if(boxAtOld(boxPosition)){ //check if there is a box
           swap(boxPositionY, boxPositionX, "*", boxPositionY+1, boxPositionX, " ");
         } return true;
-      } return false;     
+      } return false;   
     case "right":    
       boxPositionY = player.getY();
       boxPositionX = player.getX()+1;
       boxPosition = parsed[boxPositionY][boxPositionX];
       newBoxPosition = parsed[boxPositionY][boxPositionX+1];
       if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX))){
-        if(boxPosition.equals(BOXTARGET)){
-          swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX+1, ".");
-        } else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){
+        if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
           swap(boxPositionY, boxPositionX, "T", boxPositionY, boxPositionX+1, " ");
-        } else if(boxAtOld(boxPosition)){
+        } else if(boxAtOld(boxPosition)){ //check if there is a box
           swap(boxPositionY, boxPositionX, "*", boxPositionY, boxPositionX+1, " ");
         } return true;
-      } return false;
+      } return false;   
   } return false;
 }
 
@@ -257,7 +248,7 @@ boolean playerAtOld(String position){
 }
 
 boolean boxAtOld(String position){
-  return position.equals("*");
+  return position.equals(BOX) || position.equals(BOXTARGET);
 }
 
 void swap(int oldY, int oldX, String oldPositionChar, int newY, int newX, String newPositionChar){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
