@@ -83,5 +83,11 @@ if two direction keys were pressed at the same time
 
 2022-06-02
 --------------------------------------------------------------
-Andrey and Ziying :: Fixed the bug
+Andrey and Ziying :: Fixed the bug that was mentioned previously
+==============================================================
+
+2022-06-05
+--------------------------------------------------------------
+Andrey and Ziying ::
+- Made the swap method more generalized, taking coordinates as parameters
 ==============================================================
