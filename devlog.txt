@@ -96,6 +96,12 @@ Andrey and Ziying :: Fixed the bug that was mentioned previously
 --------------------------------------------------------------
 Andrey and Ziying ::
 - Made the swap method more generalized, taking coordinates as parameters
-- Updated README and the UML diagram
-- Finished the push() method -- box will be moved if the plater moves it
+- Discovered a problem where the player was eating the box once it got on
+target
+- Fixed the bug
+- Finished the push() method -- box will be moved if the player moves it
+- Included a level restart feature once the user pressed space bar
+- Fixed a bug where the map couldn't be reparsed more than once by duplicating
+maps using dupliKate
+- Updated README, the UML diagram, and devlog
 ==============================================================
