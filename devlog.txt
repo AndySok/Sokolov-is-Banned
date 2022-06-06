@@ -84,7 +84,7 @@ Everyone :: Player moves in all directions
 2022-06-01
 --------------------------------------------------------------
 Andrey and Ziying :: Discovered a bug that would clone the player
-if two direction keys were pressed at the same time
+if multiple direction keys were pressed at the same time
 ==============================================================
 
 2022-06-02
@@ -104,4 +104,5 @@ target
 - Fixed a bug where the map couldn't be reparsed more than once by duplicating
 maps using dupliKate
 - Updated README, the UML diagram, and devlog
+- Created multiple new versions (v3, v4, and v5)
 ==============================================================
