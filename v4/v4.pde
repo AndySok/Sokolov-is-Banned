@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.Arrays;
 
 Player player;
-//LinkedList<String[][]> levels = parse();
-String[][] originalParsed;
 String STATE = "START";
 String[][] parsed;
 String WALL = "X";
@@ -18,7 +16,6 @@ int scale;
 void setup(){
  size(700, 700);
  parsed = parseFile("LevelOne");
- originalParsed = dupliKate(parsed);
  scale = 40;
  setupMap(parsed, scale);
 }
@@ -43,10 +40,6 @@ void keyPressed(){
       break;
     case 'd':
       move("right");
-      break;
-    case ' ':
-      println("RESTART!");
-      parsed = dupliKate(originalParsed);
       break;
    }
 //   println(Arrays.toString(parsed[1]));
@@ -251,21 +244,4 @@ String[][] parseFile(String fileLocation) {
       }
     }
     return parsed;
-}
-
-String[][] dupliKate(String[][] original){
-    String[][] copy = new String[original.length][original[0].length];
-    for(int y = 0; y < original.length; y++){
-      for(int x = 0; x < original[y].length; x++){
-        copy[y][x] = original[y][x];
-      }
-    } return copy; 
-}
-
-LinkedList parse(){
-  LinkedList<String[][]> list = new LinkedList<String[][]>();
-//for(int i=0; i<25; i++){
-//  levels.add(parseFile(i + ".txt");
-//} 
-  return list;
 }
