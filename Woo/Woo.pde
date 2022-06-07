@@ -6,7 +6,7 @@ import java.util.Arrays;
 Player player;
 //LinkedList<String[][]> levels = parse();
 String[][] originalParsed;
-String STATE = "START";
+String STATE = "PLAY";
 String[][] parsed;
 String WALL = "X";
 String BOX = "*";
@@ -26,9 +26,23 @@ void setup(){
 
 void draw(){
 //  while(checkWin() != true){
-   background(255);
-   setupMap(parsed, scale);
-//  }
+  if(STATE.equals("START")){
+   startMenu(); 
+  } else if(STATE.equals("PLAY")){
+   game();
+ }
+}
+
+void startMenu(){
+  
+}
+
+void game(){
+ background(255);
+ setupMap(parsed, scale);
+ if(checkWin()){
+   STATE = "FINISH";
+ }
 }
 
 boolean checkWin(){
