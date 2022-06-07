@@ -14,9 +14,10 @@ String TARGET = ".";
 String PLAYERTARGET = "P";
 String BOXTARGET = "T";
 int scale;
+int centered = 800/4;
 
 void setup(){
- size(700, 700);
+ size(800, 800);
  parsed = parseFile("BetterLevelOne");
  originalParsed = dupliKate(parsed);
  scale = 30;
@@ -24,10 +25,18 @@ void setup(){
 }
 
 void draw(){
-  
- background(255);
- setupMap(parsed, scale);
-// checkWin();
+//  while(checkWin() != true){
+   background(255);
+   setupMap(parsed, scale);
+//  }
+}
+
+boolean checkWin(){
+ for(int y=0;y<parsed.length;y++){
+  for(int x=0;x<parsed[0].length;x++){
+    if(parsed[y][x].equals(BOX)) return false;
+  }
+ } return true;
 }
 
 void keyPressed(){
