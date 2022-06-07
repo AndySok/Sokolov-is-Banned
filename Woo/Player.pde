@@ -1,17 +1,20 @@
 class Player{
   
  color Color; float x; float y; int scale; 
+ PShape s;
  
- Player(float x, float y, int scale){
+ Player(String file, float x, float y, int scale){
+    this.s = loadShape(file);
     this.x = x;
     this.y = y;
     this.scale = scale;
-    this.Color = color(32, 194, 32);
+    //this.Color = color(32, 194, 32);
  }
  
  void draw(){
-   fill(Color);
-   rect(this.x, this.y, scale, scale);
+   shape(s, x*scale, y*scale, 20, 20);
+   //fill(Color);
+   //rect(this.x, this.y, scale, scale);
  }
  
  int getX(){

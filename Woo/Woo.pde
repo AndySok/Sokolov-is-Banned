@@ -273,14 +273,14 @@ void setupMap(String[][] parsed, int scale){
         (new Box(x*scale, y*scale, scale, 0)).draw();
         break;
        case "@":
-        player = new Player(x*scale, y*scale, scale);
+        player = new Player("flower.svg",x*scale, y*scale, scale);
         player.draw();        
         break;
        case "T":
         (new Box(x*scale, y*scale, scale, 1)).draw();
         break;
        case "P":
-        player = new Player(x*scale, y*scale, scale);
+        player = new Player("flower.svg", x*scale, y*scale, scale);
         player.draw();
         break;
       }
