@@ -31,6 +31,9 @@ OBSTACLES OVERCOME
     position
 3. Accounting for four directions each time
   Fixed by having move() intake parameters and invoking move() with the said params
+4. Unable to load images to replace primitive sprites
+  Fixed by using PImage, going further into the documentation, and adjusting height
+  and width
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -105,4 +108,17 @@ target
 maps using dupliKate
 - Updated README, the UML diagram, and devlog
 - Created multiple new versions (v3, v4, and v5)
+==============================================================
+
+2022-06-07
+--------------------------------------------------------------
+Andrey and Ziying ::
+- Fixed the player from eating the boxes
+==============================================================
+
+2022-06-07
+--------------------------------------------------------------
+Andrey and Ziying ::
+- Adding PNG/JPEG images to replace the primitive Player box
+- 
 ==============================================================
