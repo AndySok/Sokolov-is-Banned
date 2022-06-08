@@ -19,7 +19,7 @@ int centered = 800/4;
 
 void setup(){
  size(800, 800);
- parsed = parseFile("LevelFour");
+ parsed = parseFile("LevelTen");
  originalParsed = dupliKate(parsed);
  scale = 50;
  setupMap(parsed, scale);
@@ -130,10 +130,10 @@ void keyPressed(){
             swap(oldY, oldX, "P", newY, oldX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
-              swap(oldY, oldX, PLAYER, newY, newX, ".");;
+              swap(oldY, oldX, PLAYER, newY, newX, TARGET);;
             }            
           } else{
-            swap(oldY, oldX, PLAYER, newY, newX, ".");            
+            swap(oldY, oldX, PLAYER, newY, newX, TARGET);            
           }
         } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
             if(push(direction)){

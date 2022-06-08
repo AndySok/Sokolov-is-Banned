@@ -34,6 +34,7 @@ OBSTACLES OVERCOME
 4. Unable to load images to replace primitive sprites
   Fixed by using PImage, going further into the documentation, and adjusting height
   and width
+5. Multiple issues with boxes and targets being eaten by the Player
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -120,5 +121,5 @@ Andrey and Ziying ::
 --------------------------------------------------------------
 Andrey and Ziying ::
 - Adding PNG/JPEG images to replace the primitive Player box
-- 
+- Bug where multiple targets next to each other would be "eaten" by the player
 ==============================================================
