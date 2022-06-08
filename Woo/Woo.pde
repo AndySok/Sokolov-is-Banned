@@ -8,6 +8,7 @@ Player player;
 String[][] originalParsed;
 String STATE = "PLAY";
 String[][] parsed;
+String PLAYER = "@";
 String WALL = "X";
 String BOX = "*";
 String TARGET = ".";
@@ -18,9 +19,9 @@ int centered = 800/4;
 
 void setup(){
  size(800, 800);
- parsed = parseFile("BetterLevelOne");
+ parsed = parseFile("LevelThree");
  originalParsed = dupliKate(parsed);
- scale = 30;
+ scale = 50;
  setupMap(parsed, scale);
 }
 
@@ -96,10 +97,10 @@ void keyPressed(){
             swap(oldY, oldX, "P", newY, oldX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
-              swap(oldY, oldX, "@", newY, newX, ".");;
+              swap(oldY, oldX, PLAYER, newY, newX, ".");;
             }            
           } else{
-            swap(oldY, oldX, "@", newY, newX, ".");            
+            swap(oldY, oldX, PLAYER, newY, newX, ".");            
           }
         } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
             if(push(direction)){
@@ -107,12 +108,12 @@ void keyPressed(){
             }         
         } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
             if(push(direction)){
-              swap(oldY, oldX, "@",  newY, newX, " ");
+              swap(oldY, oldX, PLAYER,  newY, newX, " ");
             } 
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
             swap(oldY, oldX, "P", newY, newX, " ");
         } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, "@",  newY, newX, " ");
+          swap(oldY, oldX, PLAYER,  newY, newX, " ");
         }
       }
       break;
@@ -129,10 +130,10 @@ void keyPressed(){
             swap(oldY, oldX, "P", newY, oldX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
-              swap(oldY, oldX, "@", newY, newX, ".");;
+              swap(oldY, oldX, PLAYER, newY, newX, ".");;
             }            
           } else{
-            swap(oldY, oldX, "@", newY, newX, ".");            
+            swap(oldY, oldX, PLAYER, newY, newX, ".");            
           }
         } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
             if(push(direction)){
@@ -140,12 +141,12 @@ void keyPressed(){
             }         
         } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
             if(push(direction)){
-              swap(oldY, oldX, "@",  newY, newX, " ");
+              swap(oldY, oldX, PLAYER,  newY, newX, " ");
             } 
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
             swap(oldY, oldX, "P", newY, newX, " ");
         } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, "@",  newY, newX, " ");
+          swap(oldY, oldX, PLAYER,  newY, newX, " ");
         }
       }
       break;
@@ -162,10 +163,10 @@ void keyPressed(){
             swap(oldY, oldX, "P", newY, oldX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
-              swap(oldY, oldX, "@", newY, newX, ".");;
+              swap(oldY, oldX, PLAYER, newY, newX, ".");;
             }            
           } else{
-            swap(oldY, oldX, "@", newY, newX, ".");            
+            swap(oldY, oldX, PLAYER, newY, newX, ".");            
           }
         } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
             if(push(direction)){
@@ -173,12 +174,12 @@ void keyPressed(){
             }         
         } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
             if(push(direction)){
-              swap(oldY, oldX, "@",  newY, newX, " ");
+              swap(oldY, oldX, PLAYER,  newY, newX, " ");
             } 
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
             swap(oldY, oldX, "P", newY, newX, " ");
         } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, "@",  newY, newX, " ");
+          swap(oldY, oldX, PLAYER,  newY, newX, " ");
         }
       }
       break;
@@ -195,10 +196,10 @@ void keyPressed(){
             swap(oldY, oldX, "P", newY, oldX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
-              swap(oldY, oldX, "@", newY, newX, ".");;
+              swap(oldY, oldX, PLAYER, newY, newX, ".");;
             }            
           } else{
-            swap(oldY, oldX, "@", newY, newX, ".");            
+            swap(oldY, oldX, PLAYER, newY, newX, ".");            
           }
         } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
             if(push(direction)){
@@ -206,12 +207,12 @@ void keyPressed(){
             }         
         } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
             if(push(direction)){
-              swap(oldY, oldX, "@",  newY, newX, " ");
+              swap(oldY, oldX, PLAYER,  newY, newX, " ");
             } 
         } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
             swap(oldY, oldX, "P", newY, newX, " ");
         } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, "@",  newY, newX, " ");
+          swap(oldY, oldX, PLAYER,  newY, newX, " ");
         }
       }
       break;
@@ -287,14 +288,14 @@ void setupMap(String[][] parsed, int scale){
         (new Box(x*scale, y*scale, scale, 0)).draw();
         break;
        case "@":
-        player = new Player(x*scale, y*scale, scale);
+        player = new Player("emoji.png", x*scale, y*scale, scale);
         player.draw();        
         break;
        case "T":
         (new Box(x*scale, y*scale, scale, 1)).draw();
         break;
        case "P":
-        player = new Player(x*scale, y*scale, scale);
+        player = new Player("emoji.png", x*scale, y*scale, scale);
         player.draw();
         break;
       }
@@ -308,7 +309,7 @@ boolean notNullorWall(String spot){
 }
 
 boolean playerAtOld(String position){
-  return position.equals("@");
+  return position.equals(PLAYER);
 }
 
 boolean boxAtOld(String position){

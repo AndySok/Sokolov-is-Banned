@@ -1,8 +1,9 @@
 class Player{
   
- color Color; float x; float y; int scale; 
+ color Color; float x; float y; int scale; PImage photo;
  
- Player(float x, float y, int scale){
+ Player(String file, float x, float y, int scale){
+    photo = loadImage(file);
     this.x = x;
     this.y = y;
     this.scale = scale;
@@ -10,8 +11,7 @@ class Player{
  }
  
  void draw(){
-   fill(Color);
-   rect(this.x, this.y, scale, scale);
+   image(photo, x+6, y+4, (width/20), (height/20));
  }
  
  int getX(){
