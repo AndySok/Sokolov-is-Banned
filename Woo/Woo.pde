@@ -19,7 +19,7 @@ int centered = 800/4;
 
 void setup(){
  size(800, 800);
- parsed = parseFile("LevelFour");
+ parsed = parseFile("Test");
  originalParsed = dupliKate(parsed);
  scale = 50;
  setupMap(parsed, scale);
@@ -41,9 +41,9 @@ void startMenu(){
 void game(){
  background(255);
  setupMap(parsed, scale);
- if(checkWin()){
-   STATE = "FINISH";
- }
+ //if(checkWin()){
+ //  STATE = "FINISH";
+ //}
 }
 
 boolean checkWin(){
@@ -73,9 +73,9 @@ void keyPressed(){
       parsed = dupliKate(originalParsed);
       break;
    }
-   println(Arrays.toString(parsed[1]));
-   println(Arrays.toString(parsed[2]));
-   println(Arrays.toString(parsed[3]));
+   println(Arrays.toString(parsed[5]));
+   println(Arrays.toString(parsed[6]));
+   println(Arrays.toString(parsed[7]));
    println();
  }
 
@@ -94,7 +94,7 @@ void keyPressed(){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
           if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, oldX, ".");            
+            swap(oldY, oldX, "P", newY, newX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
               swap(oldY, oldX, PLAYER, newY, newX, ".");;
@@ -124,10 +124,10 @@ void keyPressed(){
       newX = player.getX()-1;
       newPosition = parsed[newY][newX];
       if(notNullorWall(newPosition)){ //if it's not a wall, move up
-//        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
+        
           if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, oldX, ".");            
+            swap(oldY, oldX, "P", newY, newX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
               swap(oldY, oldX, PLAYER, newY, newX, ".");;
@@ -160,7 +160,7 @@ void keyPressed(){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
           if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, oldX, ".");            
+            swap(oldY, oldX, "P", newY, newX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
               swap(oldY, oldX, PLAYER, newY, newX, ".");;
@@ -193,7 +193,7 @@ void keyPressed(){
 //        println("UP");
         if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
           if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, oldX, ".");            
+            swap(oldY, oldX, "P", newY, newX, ".");            
           } else if(newPosition.equals(BOX)){ //if we're moving a box
             if(push(direction)){
               swap(oldY, oldX, PLAYER, newY, newX, ".");;
