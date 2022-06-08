@@ -18,15 +18,17 @@ String BOXTARGET = "T";
 LevelTransition transition;
 int scale;
 int centered = width/2;
+Button confirm;
 
 void setup(){
  levels = parse();
  size(800, 800);
  scale = 50;
+ confirm = new Button((width/2+55), 505, scale*4);
  fontSizes[0] = createFont("Blaka-Regular.ttf", 128);
  fontSizes[1] = createFont("Blaka-Regular.ttf", 64);
- fontSizes[2] = createFont("Blaka-Regular.ttf", 32);
- fontSizes[3] = createFont("Blaka-Regular.ttf", 16);
+ fontSizes[2] = createFont("Blaka-Regular.ttf", 48);
+ fontSizes[3] = createFont("Blaka-Regular.ttf", 28);
  transition = new LevelTransition(fontSizes[0], 1);
 }
 
@@ -43,8 +45,9 @@ void draw(){
 }
 
 void startMenu(){
-  transition.draw();
-  parsed = levels.get(transition.getLevel());
+  background(0);
+//  transition.draw();
+  parsed = levels.get(transition.getLevel()-1);
   originalParsed = dupliKate(parsed);
   STATE = "PLAY";
 }
@@ -59,11 +62,9 @@ void game(){
  setupMap(parsed, scale);
  scale = 30;
 // levelCounter(transition.getLevel());
- transition.draw();
  if(checkWin()){
    STATE = "FINISH";
-   transition.setLevel(transition.getLevel()+1);
-   background(255);
+   transition.draw();
  }
 }
 
@@ -111,6 +112,12 @@ void keyPressed(){
    println(Arrays.toString(parsed[7]));
    println();
  }
+ 
+   void mousePressed() {
+    if (confirm.rectOver) {
+      transition.nextLevel();
+    }
+  }
 
  void move(String direction){
   String oldPosition = parsed[player.getY()][player.getX()];

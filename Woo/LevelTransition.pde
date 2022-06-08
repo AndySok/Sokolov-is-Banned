@@ -16,9 +16,8 @@ class LevelTransition{
     return levelCounter;
   }
   
-  int setLevel(int increment){
-    levelCounter += increment;
-    return levelCounter-increment;
+  void nextLevel(){
+    levelCounter ++;
   }
   
   void setupTransition(int level){
@@ -34,5 +33,10 @@ class LevelTransition{
     rect(0+(width*1/6), 0+50,width*2/3, width/4);
     fill(0);
     text("LEVEL COMPLETE!", width/2, 130);
+    textFont(fontSizes[2]);
+    text((levels.size() - this.getLevel()) + " remaining", width/2, 200);
+    confirm.draw();
+    fill(0);
+    text("next level", (width/2+125)+scale, 500+scale);
   }
 }
