@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 
 Player player;
-//LinkedList<String[][]> levels = parse();
+LinkedList<String[][]> levels;
 String[][] originalParsed;
 String STATE = "PLAY";
 String[][] parsed;
@@ -18,8 +18,9 @@ int scale;
 int centered = 800/4;
 
 void setup(){
+ levels = parse();
  size(800, 800);
- parsed = parseFile("Test");
+ parsed = parseFile("1");
  originalParsed = dupliKate(parsed);
  scale = 50;
  setupMap(parsed, scale);
@@ -41,6 +42,7 @@ void startMenu(){
 void game(){
  background(255);
  setupMap(parsed, scale);
+ levelCounter(1);
  //if(checkWin()){
  //  STATE = "FINISH";
  //}
@@ -330,6 +332,10 @@ boolean push(String type){
   } return false;
 }
 
+void levelCounter(int current){
+ println("" + current + "/" + levels.size()); 
+}
+
 void setupMap(String[][] parsed, int scale){
   for(int y = 0; y < parsed.length; y++){
     for(int x = 0; x < parsed[y].length; x++){
@@ -399,10 +405,10 @@ String[][] dupliKate(String[][] original){
     } return copy; 
 }
 
-LinkedList parse(){
-  LinkedList<String[][]> list = new LinkedList<String[][]>();
-//for(int i=0; i<25; i++){
-//  levels.add(parseFile(i + ".txt");
-//} 
-  return list;
+LinkedList<String[][]> parse(){
+  LinkedList<String[][]> levels = new LinkedList<String[][]>();
+  for(int i=1; i<=10; i++){
+    levels.add(parseFile("levels/" + i));
+  } 
+  return levels;
 }
