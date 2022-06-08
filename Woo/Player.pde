@@ -11,7 +11,7 @@ class Player{
  }
  
  void draw(){
-   image(photo, x+6, y+4, (width/20), (height/20));
+   image(photo, x+6, y+4, (width/22), (height/22));
  }
  
  int getX(){

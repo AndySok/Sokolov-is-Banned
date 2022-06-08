@@ -19,9 +19,9 @@ int centered = 800/4;
 
 void setup(){
  size(800, 800);
- parsed = parseFile("Test");
+ parsed = parseFile("LevelFour");
  originalParsed = dupliKate(parsed);
- scale = 50;
+ scale = 40;
  setupMap(parsed, scale);
 }
 
