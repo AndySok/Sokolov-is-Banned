@@ -6,7 +6,7 @@ import java.util.Arrays;
 Player player;
 LinkedList<String[][]> levels;
 String[][] originalParsed;
-String STATE = "PLAY";
+String STATE = "START";
 String[][] parsed;
 String PLAYER = "@";
 String WALL = "X";
@@ -21,11 +21,8 @@ int centered = 800/4;
 void setup(){
  levels = parse();
  size(800, 800);
- parsed = parseFile("1");
- originalParsed = dupliKate(parsed);
  scale = 50;
- setupMap(parsed, scale);
- transition = new LevelTransition(createFont("Blaka-Regular.ttf", 128));
+ transition = new LevelTransition(createFont("Blaka-Regular.ttf", 128), 1);
 }
 
 void draw(){
@@ -33,7 +30,7 @@ void draw(){
   if(STATE.equals("START")){
    startMenu();
   } else if(STATE.equals("FINISH")){
-   nextLevelMenu();
+   nextLevel();
   }
   else if(STATE.equals("PLAY")){
    game();
@@ -41,10 +38,13 @@ void draw(){
 }
 
 void startMenu(){
-
+  transition.draw();
+  parsed = levels.get(transition.getLevel());
+  originalParsed = dupliKate(parsed);
+  STATE = "PLAY";
 }
 
-void nextLevelMenu(){
+void nextLevel(){
  background(255);
  transition.draw();
 }
@@ -53,10 +53,11 @@ void game(){
  background(255);
  setupMap(parsed, scale);
 // (new StarterPage()).draw();
- levelCounter(1);
+ levelCounter(transition.getLevel());
  transition.draw();
  if(checkWin()){
    STATE = "FINISH";
+   transition.setLevel(transition.getLevel()+1);
    background(255);
  }
 }
