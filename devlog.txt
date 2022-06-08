@@ -121,5 +121,6 @@ Andrey and Ziying ::
 --------------------------------------------------------------
 Andrey and Ziying ::
 - Adding PNG/JPEG images to replace the primitive Player box
-- Bug where multiple targets next to each other would be "eaten" by the player
+- Fixed bug where multiple targets next to each other would be "eaten" by the player
+- Added ten total levels
 ==============================================================
