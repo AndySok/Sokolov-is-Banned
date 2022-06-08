@@ -21,9 +21,17 @@ class LevelTransition{
     return levelCounter-increment;
   }
   
+  void setupTransition(int level){
+    
+  }
+  
   void draw(){
+    setupTransition(this.getLevel());
     fill(0);
     textFont(font);
-    text("Test", width-(width*1/3), height-50);
+    fill(190, 229, 176); 
+    rect(0+(width*1/6), 0+50,width*2/3, width/4);
+    fill(0);
+    text("CONGRATULATIONS", 0+(width*1/6)+50, width/4+20);
   }
 }
