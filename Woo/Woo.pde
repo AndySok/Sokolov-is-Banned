@@ -14,6 +14,7 @@ String BOX = "*";
 String TARGET = ".";
 String PLAYERTARGET = "P";
 String BOXTARGET = "T";
+LevelTransition transition;
 int scale;
 int centered = 800/4;
 
@@ -24,13 +25,17 @@ void setup(){
  originalParsed = dupliKate(parsed);
  scale = 50;
  setupMap(parsed, scale);
+ transition = new LevelTransition(createFont("Blaka-Regular.ttf", 128));
 }
 
 void draw(){
 //  while(checkWin() != true){
   if(STATE.equals("START")){
    startMenu();
-  } else if(STATE.equals("PLAY")){
+  } else if(STATE.equals("FINISH")){
+   nextLevelMenu();
+  }
+  else if(STATE.equals("PLAY")){
    game();
  }
 }
@@ -39,14 +44,21 @@ void startMenu(){
 
 }
 
+void nextLevelMenu(){
+ background(255);
+ transition.draw();
+}
+
 void game(){
  background(255);
  setupMap(parsed, scale);
- (new StarterPage()).draw();
+// (new StarterPage()).draw();
  levelCounter(1);
- //if(checkWin()){
- //  STATE = "FINISH";
- //}
+ transition.draw();
+ if(checkWin()){
+   STATE = "FINISH";
+   background(255);
+ }
 }
 
 boolean checkWin(){
