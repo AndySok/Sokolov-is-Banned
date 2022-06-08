@@ -42,6 +42,7 @@ void startMenu(){
 void game(){
  background(255);
  setupMap(parsed, scale);
+ (new StarterPage()).draw();
  levelCounter(1);
  //if(checkWin()){
  //  STATE = "FINISH";
