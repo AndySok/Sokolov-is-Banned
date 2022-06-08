@@ -1,15 +1,15 @@
 class LevelTransition{
-  PFont font;
+  PFont headingFont;
   int levelCounter;
   
   LevelTransition(PFont font){
     levelCounter = 0;
-    this.font = font;
+    this.headingFont = font;
   }
   
   LevelTransition(PFont font, int level){
     levelCounter = level;
-    this.font = font;
+    this.headingFont = font;
   }
   
   int getLevel(){
@@ -28,10 +28,11 @@ class LevelTransition{
   void draw(){
     setupTransition(this.getLevel());
     fill(0);
-    textFont(font);
+    textFont(fontSizes[1]);
+    textAlign(CENTER, CENTER);
     fill(190, 229, 176); 
     rect(0+(width*1/6), 0+50,width*2/3, width/4);
     fill(0);
-    text("CONGRATULATIONS", 0+(width*1/6)+50, width/4+20);
+    text("LEVEL COMPLETE!", width/2, 130);
   }
 }

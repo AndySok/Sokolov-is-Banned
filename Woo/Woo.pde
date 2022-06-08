@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 Player player;
 LinkedList<String[][]> levels;
+PFont[] fontSizes = new PFont[4];
 String[][] originalParsed;
 String STATE = "START";
 String[][] parsed;
@@ -16,13 +17,17 @@ String PLAYERTARGET = "P";
 String BOXTARGET = "T";
 LevelTransition transition;
 int scale;
-int centered = 800/4;
+int centered = width/2;
 
 void setup(){
  levels = parse();
  size(800, 800);
  scale = 50;
- transition = new LevelTransition(createFont("Blaka-Regular.ttf", 128), 1);
+ fontSizes[0] = createFont("Blaka-Regular.ttf", 128);
+ fontSizes[1] = createFont("Blaka-Regular.ttf", 64);
+ fontSizes[2] = createFont("Blaka-Regular.ttf", 32);
+ fontSizes[3] = createFont("Blaka-Regular.ttf", 16);
+ transition = new LevelTransition(fontSizes[0], 1);
 }
 
 void draw(){
@@ -52,8 +57,8 @@ void nextLevel(){
 void game(){
  background(255);
  setupMap(parsed, scale);
-// (new StarterPage()).draw();
- levelCounter(transition.getLevel());
+ scale = 30;
+// levelCounter(transition.getLevel());
  transition.draw();
  if(checkWin()){
    STATE = "FINISH";
@@ -355,23 +360,23 @@ void setupMap(String[][] parsed, int scale){
     for(int x = 0; x < parsed[y].length; x++){
       switch(parsed[y][x]){
        case "X":
-        (new Wall(x*scale, y*scale, scale)).draw();
+        (new Wall(x*scale + centered, y*scale + centered, scale)).draw();
         break;
        case ".":
-        (new Target(x*scale + scale/2, y*scale + scale/2, scale/2)).draw();
+        (new Target(x*scale + scale/2 + centered, y*scale + scale/2 + centered, scale/2)).draw();
         break;
        case "*":
-        (new Box(x*scale, y*scale, scale, 0)).draw();
+        (new Box(x*scale + centered, y*scale + centered, scale, 0)).draw();
         break;
        case "@":
-        player = new Player("emoji.png", x*scale, y*scale, scale);
+        player = new Player("emoji.png", x*scale + centered, y*scale + centered, scale);
         player.draw();
         break;
        case "T":
-        (new Box(x*scale, y*scale, scale, 1)).draw();
+        (new Box(x*scale + centered, y*scale + centered, scale, 1)).draw();
         break;
        case "P":
-        player = new Player("emoji.png", x*scale, y*scale, scale);
+        player = new Player("emoji.png", x*scale + centered, y*scale + centered, scale);
         player.draw();
         break;
       }
