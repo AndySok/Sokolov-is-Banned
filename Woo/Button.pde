@@ -14,7 +14,7 @@ class Button{
    rectHighlight = color(180, 226, 163);
   }
   
-  void draw() {
+  void draw(String text) {
   update(mouseX, mouseY);
   
   if (rectOver) {
@@ -24,6 +24,9 @@ class Button{
   }
   stroke(255);
   rect(rectX, rectY, rectSize, rectSize/3);
+  fill(0);
+  textAlign(LEFT, CENTER);
+  text(text, rectX+10, rectY+20); 
   }
   
   void update(int x, int y) {

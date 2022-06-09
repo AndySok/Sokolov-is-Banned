@@ -25,7 +25,7 @@ void setup(){
  size(800, 800);
  scale = 50;
  confirm = new Button((width/2+55), 505, scale*4);
- fontSizes[0] = createFont("Blaka-Regular.ttf", 128);
+ fontSizes[0] = createFont("Blaka-Regular.ttf", 96);
  fontSizes[1] = createFont("Blaka-Regular.ttf", 64);
  fontSizes[2] = createFont("Blaka-Regular.ttf", 48);
  fontSizes[3] = createFont("Blaka-Regular.ttf", 28);
@@ -45,15 +45,14 @@ void draw(){
 }
 
 void startMenu(){
-  background(0);
-//  transition.draw();
-  level = levels.get(transition.getLevel()-1);
+  background(255);
+  level = levels.get(transition.getLevel()-1); //CHANGE LEVEL
   originalLevel = dupliKate(level);
-  STATE = "PLAY";
+  transition.draw();
 }
 
 void nextLevel(){
- background(255);
+// background(255);
  transition.draw();
 }
 
@@ -112,15 +111,19 @@ void keyPressed(){
     case 'D':
       move("right");
       break;
+    case 'P':
+      STATE = "FINISH";
+    case 'p': 
+      STATE = "FINISH";
     case ' ':
       println("RESTART!");
       level = dupliKate(originalLevel);
       break;
    }
-   println(Arrays.toString(level[5]));
-   println(Arrays.toString(level[6]));
-   println(Arrays.toString(level[7]));
-   println();
+   //println(Arrays.toString(level[5]));
+   //println(Arrays.toString(level[6]));
+   //println(Arrays.toString(level[7]));
+   //println();
  }
  
    void mousePressed() {
