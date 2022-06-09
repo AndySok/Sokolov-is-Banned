@@ -446,7 +446,7 @@ String[][] dupliKate(String[][] original){
 
 LinkedList<String[][]> parse(){
   LinkedList<String[][]> levels = new LinkedList<String[][]>();
-  for(int i=1; i<=10; i++){
+  for(int i=1; i<=listPaths("levels").length; i++){
     levels.add(parseFile("levels/" + i));
   }
   return levels;
