@@ -9,8 +9,4 @@ class Target extends Object{
    circle(this.x, this.y, scale/2);
  }
  
- String getType(){
-   return "TARGET"; 
- }
- 
 }

@@ -22,8 +22,4 @@ class Player{
  int getY(){
    return ((int)this.y - centeredHeight) / scale; 
  }
- 
- String getType(){
-   return "PLAYER"; 
- }
 }
