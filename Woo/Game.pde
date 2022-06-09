@@ -29,7 +29,7 @@ class Game{
   }
   
   boolean checkWin(){
-   for(int y=0;y<level.length;y++){
+   for(int y=0;y<level.length-2;y++){
     for(int x=0;x<level[0].length;x++){
       if(level[y][x].equals("*")) return false;
     }
@@ -276,7 +276,7 @@ class Game{
   }
 
   void setupMap(String[][] level, int scale){
-    for(int y = 0; y < level.length; y++){
+    for(int y = 0; y < level.length-2; y++){
       for(int x = 0; x < level[y].length; x++){
         switch(level[y][x]){
          case "X":
@@ -302,6 +302,8 @@ class Game{
         }
       }
      }
+     centeredWidth = Integer.parseInt(level[level.length-2][0]);
+     centeredHeight = Integer.parseInt(level[level.length-1][0]);
    } // end method
   
   //HELPER METHODS
@@ -335,12 +337,14 @@ class Game{
   String[][] parseFile(String fileLocation) {
       String[] lines = loadStrings(fileLocation);
       String[][] level = new String[lines.length][lines[0].length()];
-      for(int y = 0; y < level.length; y++){
+      for(int y = 0; y < level.length-2; y++){
         for(int x = 0; x < level[y].length; x++){
           level[y][x] = lines[y].substring(0, 1);
           lines[y] = lines[y].substring(1);
         }
       }
+      level[level.length-2][0] = lines[level.length-2];
+      level[level.length-1][0] = lines[level.length-1];
       return level;
   }
   

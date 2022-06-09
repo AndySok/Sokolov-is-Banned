@@ -12,9 +12,7 @@ Player player;
 String[][] level;
 String[][] originalLevel;
 PFont[] fontSizes = new PFont[4];
-int scale;
-int centeredWidth = 0;
-int centeredHeight = 0;
+int scale, centeredWidth, centeredHeight;
 
 void setup(){
  size(800, 600);
