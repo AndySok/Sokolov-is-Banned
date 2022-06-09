@@ -128,12 +128,14 @@ Andrey and Ziying ::
 2022-06-08
 --------------------------------------------------------------
 Andrey and Ziying ::
-- Created the start screen
-- Linked maps together
+- Created the start screen and completion screen
+- Created a system that will dynamically add levels as time goes on
+- Implemented the entirety of the state system and successfully transitioned
+between levels
 ==============================================================
 
 2022-06-09
 --------------------------------------------------------------
 Andrey and Ziying ::
-
+- Adjusted some colors and strokes for the game
 ==============================================================
