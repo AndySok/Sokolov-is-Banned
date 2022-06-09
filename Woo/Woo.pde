@@ -25,10 +25,10 @@ void setup(){
  size(800, 600);
  scale = 50;
  confirm = new Button((width/2+55), 505, scale*4);
- fontSizes[0] = createFont("Blaka-Regular.ttf", 92);
- fontSizes[1] = createFont("Roboto-Bold.ttf", 64);
- fontSizes[2] = createFont("Roboto-Black.ttf", 30);
- fontSizes[3] = createFont("VarelaRound-Regular.ttf", 20);
+ fontSizes[0] = createFont("fonts/Blaka-Regular.ttf", 92);
+ fontSizes[1] = createFont("fonts/Roboto-Bold.ttf", 56);
+ fontSizes[2] = createFont("fonts/Roboto-Black.ttf", 30);
+ fontSizes[3] = createFont("fonts/VarelaRound-Regular.ttf", 20);
  transition = new LevelTransition(fontSizes[0], 1);
 }
 
