@@ -13,8 +13,8 @@ String[][] level;
 String[][] originalLevel;
 PFont[] fontSizes = new PFont[4];
 int scale;
-int centeredWidth = width;
-int centeredHeight = height;
+int centeredWidth = 0;
+int centeredHeight = 0;
 
 
 
@@ -32,43 +32,13 @@ void setup(){
 
 void draw(){
   if(STATE.equals("START")){
-   startMenu();
+   game.startMenu();
   } else if(STATE.equals("FINISH")){
-   nextLevel();
+   game.nextLevel();
   }
   else if(STATE.equals("PLAY")){
-   game();
+   game.game();
  }
-}
-
-void startMenu(){
-  background(255);
-  level = levels.get(transition.getLevel()-1); //CHANGE LEVEL
-  originalLevel = game.dupliKate(level);
-  transition.draw();
-}
-
-void nextLevel(){
-// background(255);
- transition.draw();
-}
-
-void game(){
- background(255);
- game.setupMap(level, scale);
- scale = 30;
-// levelCounter(transition.getLevel());
- if(checkWin()){
-   STATE = "FINISH";
- }
-}
-
-boolean checkWin(){
- for(int y=0;y<level.length;y++){
-  for(int x=0;x<level[0].length;x++){
-    if(level[y][x].equals("*")) return false;
-  }
- } return true;
 }
 
 void keyPressed(){
@@ -128,21 +98,3 @@ void keyPressed(){
       transition.nextLevel();
     }
   }
-
-
-void levelCounter(int current){
- println("" + current + "/" + levels.size());
-}
-
-//PRECONDITION: file follows the right format
-String[][] parseFile(String fileLocation) {
-    String[] lines = loadStrings(fileLocation);
-    String[][] level = new String[lines.length][lines[0].length()];
-    for(int y = 0; y < level.length; y++){
-      for(int x = 0; x < level[y].length; x++){
-        level[y][x] = lines[y].substring(0, 1);
-        lines[y] = lines[y].substring(1);
-      }
-    }
-    return level;
-}

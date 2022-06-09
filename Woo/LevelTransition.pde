@@ -16,6 +16,10 @@ class LevelTransition{
     return levelCounter;
   }
   
+  void levelCounter(int current){
+   println("" + current + "/" + levels.size());
+  }
+  
   void nextLevel(){
     level = levels.get(transition.getLevel()-1);
     originalLevel = game.dupliKate(level);

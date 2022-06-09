@@ -16,11 +16,11 @@ class Player{
  }
  
  int getX(){
-   return ((int)this.x - centered) / scale; 
+   return ((int)this.x - centeredWidth) / scale; 
  }
  
  int getY(){
-   return ((int)this.y - centered) / scale; 
+   return ((int)this.y - centeredHeight) / scale; 
  }
  
  String getType(){

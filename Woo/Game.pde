@@ -6,6 +6,36 @@ class Game{
   String PLAYERTARGET = "P";
   String BOXTARGET = "T";   
 
+  void startMenu(){
+    background(255);
+    level = levels.get(transition.getLevel()-1); //CHANGE LEVEL
+    originalLevel = game.dupliKate(level);
+    transition.draw();
+  }
+  
+  void nextLevel(){
+  // background(255);
+   transition.draw();
+  }
+  
+  void game(){
+   background(255);
+   game.setupMap(level, scale);
+   scale = 30;
+  // levelCounter(transition.getLevel());
+   if(checkWin()){
+     STATE = "FINISH";
+   }
+  }
+  
+  boolean checkWin(){
+   for(int y=0;y<level.length;y++){
+    for(int x=0;x<level[0].length;x++){
+      if(level[y][x].equals("*")) return false;
+    }
+   } return true;
+  }
+
    void move(String direction){
     String oldPosition = level[player.getY()][player.getX()];
     String newPosition;
@@ -294,11 +324,24 @@ class Game{
 
   String[][] dupliKate(String[][] original){
       String[][] copy = new String[original.length][original[0].length];
-      for(int y = 0; y < original.length; y++){
+      for(int y = 0; y < original.length-2; y++){
         for(int x = 0; x < original[y].length; x++){
           copy[y][x] = original[y][x];
         }
       } return copy;
+  }
+  
+  //PRECONDITION: file follows the right format
+  String[][] parseFile(String fileLocation) {
+      String[] lines = loadStrings(fileLocation);
+      String[][] level = new String[lines.length][lines[0].length()];
+      for(int y = 0; y < level.length; y++){
+        for(int x = 0; x < level[y].length; x++){
+          level[y][x] = lines[y].substring(0, 1);
+          lines[y] = lines[y].substring(1);
+        }
+      }
+      return level;
   }
   
   LinkedList<String[][]> parse(){
