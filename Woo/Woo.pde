@@ -3,25 +3,23 @@ import java.util.LinkedList;
 import java.io.*;
 import java.util.Arrays;
 
-Player player;
+Game game = new Game();
+String STATE = "START"; 
 LinkedList<String[][]> levels;
-PFont[] fontSizes = new PFont[4];
-String[][] originalLevel;
-String STATE = "START";
-String[][] level;
-String PLAYER = "@";
-String WALL = "X";
-String BOX = "*";
-String TARGET = ".";
-String PLAYERTARGET = "P";
-String BOXTARGET = "T";
 LevelTransition transition;
-int scale;
-int centered = width/2;
 Button confirm;
+Player player;
+String[][] level;
+String[][] originalLevel;
+PFont[] fontSizes = new PFont[4];
+int scale;
+int centeredWidth = width;
+int centeredHeight = height;
+
+
 
 void setup(){
- levels = parse();
+ levels = game.parse();
  size(800, 600);
  scale = 50;
  confirm = new Button((width/2+55), 505, scale*4);
@@ -33,7 +31,6 @@ void setup(){
 }
 
 void draw(){
-//  while(checkWin() != true){
   if(STATE.equals("START")){
    startMenu();
   } else if(STATE.equals("FINISH")){
@@ -47,7 +44,7 @@ void draw(){
 void startMenu(){
   background(255);
   level = levels.get(transition.getLevel()-1); //CHANGE LEVEL
-  originalLevel = dupliKate(level);
+  originalLevel = game.dupliKate(level);
   transition.draw();
 }
 
@@ -58,7 +55,7 @@ void nextLevel(){
 
 void game(){
  background(255);
- setupMap(level, scale);
+ game.setupMap(level, scale);
  scale = 30;
 // levelCounter(transition.getLevel());
  if(checkWin()){
@@ -69,7 +66,7 @@ void game(){
 boolean checkWin(){
  for(int y=0;y<level.length;y++){
   for(int x=0;x<level[0].length;x++){
-    if(level[y][x].equals(BOX)) return false;
+    if(level[y][x].equals("*")) return false;
   }
  } return true;
 }
@@ -78,38 +75,38 @@ void keyPressed(){
    switch(key){
     case CODED:
       if(keyCode == UP){
-        move("up");
+        game.move("up");
       } else if(keyCode == LEFT){
-        move("left");
+        game.move("left");
       } else if(keyCode == DOWN){
-        move("down");
+        game.move("down");
       } else if(keyCode == RIGHT){
-        move("right");
+        game.move("right");
       }
       break;
     case 'w':
-      move("up");
+      game.move("up");
       break;
     case 'W':
-      move("up");
+      game.move("up");
       break;
     case 'a':
-      move("left");
+      game.move("left");
       break;
     case 'A':
-      move("left");
+      game.move("left");
       break;
     case 's':
-      move("down");
+      game.move("down");
       break;
     case 'S':
-      move("down");
+      game.move("down");
       break;
     case 'd':
-      move("right");
+      game.move("right");
       break;
     case 'D':
-      move("right");
+      game.move("right");
       break;
     case 'P':
       if(STATE.equals("PLAY")){
@@ -121,13 +118,9 @@ void keyPressed(){
       }
     case ' ':
       println("RESTART!");
-      level = dupliKate(originalLevel);
+      level = game.dupliKate(originalLevel);
       break;
    }
-   //println(Arrays.toString(level[5]));
-   //println(Arrays.toString(level[6]));
-   //println(Arrays.toString(level[7]));
-   //println();
  }
 
    void mousePressed() {
@@ -136,294 +129,9 @@ void keyPressed(){
     }
   }
 
- void move(String direction){
-  String oldPosition = level[player.getY()][player.getX()];
-  String newPosition;
-  int oldY, oldX, newY, newX;
-  switch(direction){
-    case "up":
-      oldY = player.getY();
-      oldX = player.getX();
-      newY = player.getY()-1;
-      newX = player.getX();
-      newPosition = level[newY][newX];
-      if(notNullorWall(newPosition)){ //if it's not a wall, move up
-        if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
-          if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, newX, ".");
-          } else if(newPosition.equals(BOX) || newPosition.equals(BOXTARGET)){ //if we're moving a box
-            if(push(direction)){
-              newPosition = level[newY][newX];
-              if(newPosition.equals(TARGET)) { //can't check for TARGET, as push() happens afterwards
-                swap(oldY, oldX, PLAYERTARGET, newY, newX, ".");
-              } else swap(oldY, oldX, PLAYER, newY, newX, ".");
-            }
-          } else{
-            swap(oldY, oldX, PLAYER, newY, newX, ".");
-          }
-        } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
-            if(push(direction)){
-              swap(oldY, oldX, "P",  newY, newX, " ");
-            }
-        } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
-            if(push(direction)){
-              swap(oldY, oldX, PLAYER,  newY, newX, " ");
-            }
-        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-            swap(oldY, oldX, "P", newY, newX, " ");
-        } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, PLAYER,  newY, newX, " ");
-        }
-      }
-      break;
-    case "left":
-      oldY = player.getY();
-      oldX = player.getX();
-      newY = player.getY();
-      newX = player.getX()-1;
-      newPosition = level[newY][newX];
-      if(notNullorWall(newPosition)){ //if it's not a wall, move up
-        if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
-          if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, newX, ".");
-          } else if(newPosition.equals(BOX) || newPosition.equals(BOXTARGET)){ //if we're moving a box
-            if(push(direction)){
-              newPosition = level[newY][newX];
-              if(newPosition.equals(TARGET)) { //can't check for TARGET, as push() happens afterwards
-                swap(oldY, oldX, PLAYERTARGET, newY, newX, ".");
-              } else swap(oldY, oldX, PLAYER, newY, newX, ".");
-            }
-          } else{
-            swap(oldY, oldX, PLAYER, newY, newX, ".");
-          }
-        } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
-            if(push(direction)){
-              swap(oldY, oldX, "P",  newY, newX, " ");
-            }
-        } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
-            if(push(direction)){
-              swap(oldY, oldX, PLAYER,  newY, newX, " ");
-            }
-        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-            swap(oldY, oldX, "P", newY, newX, " ");
-        } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, PLAYER,  newY, newX, " ");
-        }
-      }
-      break;
-    case "down":
-      oldY = player.getY();
-      oldX = player.getX();
-      newY = player.getY()+1;
-      newX = player.getX();
-      newPosition = level[newY][newX];
-      if(notNullorWall(newPosition)){ //if it's not a wall, move up
-        if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
-          if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, newX, ".");
-          } else if(newPosition.equals(BOX) || newPosition.equals(BOXTARGET)){ //if we're moving a box
-            if(push(direction)){
-              newPosition = level[newY][newX];
-              if(newPosition.equals(TARGET)) { //can't check for TARGET, as push() happens afterwards
-                swap(oldY, oldX, PLAYERTARGET, newY, newX, ".");
-              } else swap(oldY, oldX, PLAYER, newY, newX, ".");
-            }
-          } else{
-            swap(oldY, oldX, PLAYER, newY, newX, ".");
-          }
-        } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
-            if(push(direction)){
-              swap(oldY, oldX, "P",  newY, newX, " ");
-            }
-        } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
-            if(push(direction)){
-              swap(oldY, oldX, PLAYER,  newY, newX, " ");
-            }
-        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-            swap(oldY, oldX, "P", newY, newX, " ");
-        } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, PLAYER,  newY, newX, " ");
-        }
-      }
-      break;
-    case "right":
-      oldY = player.getY();
-      oldX = player.getX();
-      newY = player.getY();
-      newX = player.getX()+1;
-      newPosition = level[newY][newX];
-      if(notNullorWall(newPosition)){ //if it's not a wall, move up
-        if(oldPosition.equals(PLAYERTARGET)){ //if we're on a target
-          if(newPosition.equals(TARGET)){ //if we're moving to a target
-            swap(oldY, oldX, "P", newY, newX, ".");
-          } else if(newPosition.equals(BOX) || newPosition.equals(BOXTARGET)){ //if we're moving a box
-            if(push(direction)){
-              newPosition = level[newY][newX];
-              if(newPosition.equals(TARGET)) { //can't check for TARGET, as push() happens afterwards
-                swap(oldY, oldX, PLAYERTARGET, newY, newX, ".");
-              } else swap(oldY, oldX, PLAYER, newY, newX, ".");
-            }
-          } else{
-            swap(oldY, oldX, PLAYER, newY, newX, ".");
-          }
-        } else if((newPosition.equals(BOXTARGET)) && playerAtOld(oldPosition)){ //if you're pushing a box off a target
-            if(push(direction)){
-              swap(oldY, oldX, "P",  newY, newX, " ");
-            }
-        } else if((newPosition.equals(BOX)) && playerAtOld(oldPosition)){
-            if(push(direction)){
-              swap(oldY, oldX, PLAYER,  newY, newX, " ");
-            }
-        } else if(newPosition.equals(TARGET) && playerAtOld(oldPosition)){
-            swap(oldY, oldX, "P", newY, newX, " ");
-        } else if(playerAtOld(oldPosition)){
-          swap(oldY, oldX, PLAYER,  newY, newX, " ");
-        }
-      }
-      break;
-    }
-  }
-
-boolean push(String type){
-  String boxPosition, newBoxPosition;
-  int oldBoxPositionY, oldBoxPositionX, boxPositionY, boxPositionX;
-  switch(type){
-    case "up":
-      oldBoxPositionY = player.getY()-1;
-      oldBoxPositionX = player.getX();
-      boxPositionY = oldBoxPositionY-1;
-      boxPositionX = oldBoxPositionX;
-      boxPosition = level[oldBoxPositionY][oldBoxPositionX];
-      newBoxPosition = level[boxPositionY][boxPositionX];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
-        if(newBoxPosition.equals(TARGET) && boxPosition.equals(BOXTARGET)){ //check if this is a box on a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, ".");
-        }
-        else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, " ");
-        }
-        else if(boxPosition.equals(BOXTARGET)){
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, ".");
-        }
-        else if(boxAtOld(boxPosition) || boxPosition.equals(BOXTARGET)){ //check if there is a box
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, " ");
-        } return true;
-      } return false;
-    case "left":
-      oldBoxPositionY = player.getY();
-      oldBoxPositionX = player.getX()-1;
-      boxPositionY = oldBoxPositionY;
-      boxPositionX = oldBoxPositionX-1;
-      boxPosition = level[oldBoxPositionY][oldBoxPositionX];
-      newBoxPosition = level[boxPositionY][boxPositionX];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
-        if(newBoxPosition.equals(TARGET) && boxPosition.equals(BOXTARGET)){ //check if this is a box on a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, ".");
-        }
-        else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, " ");
-        }
-        else if(boxPosition.equals(BOXTARGET)){
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, ".");
-        }
-        else if(boxAtOld(boxPosition) || boxPosition.equals(BOXTARGET)){ //check if there is a box
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, " ");
-        } return true;
-      } return false;
-    case "down":
-      oldBoxPositionY = player.getY()+1;
-      oldBoxPositionX = player.getX();
-      boxPositionY = oldBoxPositionY+1;
-      boxPositionX = oldBoxPositionX;
-      boxPosition = level[oldBoxPositionY][oldBoxPositionX];
-      newBoxPosition = level[boxPositionY][boxPositionX];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
-        if(newBoxPosition.equals(TARGET) && boxPosition.equals(BOXTARGET)){ //check if this is a box on a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, ".");
-        }
-        else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, " ");
-        }
-        else if(boxPosition.equals(BOXTARGET)){
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, ".");
-        }
-        else if(boxAtOld(boxPosition) || boxPosition.equals(BOXTARGET)){ //check if there is a box
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, " ");
-        } return true;
-      } return false;
-    case "right":
-      oldBoxPositionY = player.getY();
-      oldBoxPositionX = player.getX()+1;
-      boxPositionY = oldBoxPositionY;
-      boxPositionX = oldBoxPositionX+1;
-      boxPosition = level[oldBoxPositionY][oldBoxPositionX];
-      newBoxPosition = level[boxPositionY][boxPositionX];
-      if(notNullorWall(newBoxPosition) && !(newBoxPosition.equals(BOX)) && !(newBoxPosition.equals(BOXTARGET))){
-        if(newBoxPosition.equals(TARGET) && boxPosition.equals(BOXTARGET)){ //check if this is a box on a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, ".");
-        }
-        else if(newBoxPosition.equals(TARGET) && boxAtOld(boxPosition)){ // if the new position is a target
-          swap(oldBoxPositionY, oldBoxPositionX, "T", boxPositionY, boxPositionX, " ");
-        }
-        else if(boxPosition.equals(BOXTARGET)){
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, ".");
-        }
-        else if(boxAtOld(boxPosition)){ //check if there is a box
-          swap(oldBoxPositionY, oldBoxPositionX, "*", boxPositionY, boxPositionX, " ");
-        } return true;
-      } return false;
-  } return false;
-}
 
 void levelCounter(int current){
  println("" + current + "/" + levels.size());
-}
-
-void setupMap(String[][] level, int scale){
-  for(int y = 0; y < level.length; y++){
-    for(int x = 0; x < level[y].length; x++){
-      switch(level[y][x]){
-       case "X":
-        (new Wall(x*scale + centered, y*scale + centered, scale)).draw();
-        break;
-       case ".":
-        (new Target(x*scale + scale/2 + centered, y*scale + scale/2 + centered, scale/2)).draw();
-        break;
-       case "*":
-        (new Box(x*scale + centered, y*scale + centered, scale, 0)).draw();
-        break;
-       case "@":
-        player = new Player("emoji.png", x*scale + centered, y*scale + centered, scale);
-        player.draw();
-        break;
-       case "T":
-        (new Box(x*scale + centered, y*scale + centered, scale, 1)).draw();
-        break;
-       case "P":
-        player = new Player("emoji.png", x*scale + centered, y*scale + centered, scale);
-        player.draw();
-        break;
-      }
-    }
-   }
- } // end method
-
-//HELPER METHODS
-boolean notNullorWall(String spot){
-  return (spot != null && !spot.equals(WALL));
-}
-
-boolean playerAtOld(String position){
-  return position.equals(PLAYER);
-}
-
-boolean boxAtOld(String position){
-  return position.equals(BOX);
-}
-
-void swap(int oldY, int oldX, String oldPositionChar, int newY, int newX, String newPositionChar){ //swap the given characters around. Using a helper function to account for keeping the target in the same place!
-      level[oldY][oldX] = newPositionChar;
-      level[newY][newX] = oldPositionChar; //WEIRD
 }
 
 //PRECONDITION: file follows the right format
@@ -437,21 +145,4 @@ String[][] parseFile(String fileLocation) {
       }
     }
     return level;
-}
-
-String[][] dupliKate(String[][] original){
-    String[][] copy = new String[original.length][original[0].length];
-    for(int y = 0; y < original.length; y++){
-      for(int x = 0; x < original[y].length; x++){
-        copy[y][x] = original[y][x];
-      }
-    } return copy;
-}
-
-LinkedList<String[][]> parse(){
-  LinkedList<String[][]> levels = new LinkedList<String[][]>();
-  for(int i=1; i<=listPaths("levels").length; i++){
-    levels.add(parseFile("levels/" + i));
-  }
-  return levels;
 }

@@ -18,7 +18,7 @@ class LevelTransition{
   
   void nextLevel(){
     level = levels.get(transition.getLevel()-1);
-    originalLevel = dupliKate(level);
+    originalLevel = game.dupliKate(level);
     levelCounter ++;
     confirm.rectOver = false;
     STATE = "PLAY";
