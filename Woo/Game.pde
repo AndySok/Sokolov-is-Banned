@@ -286,14 +286,14 @@ class Game{
           (new Target(x*scale + scale/2 + centeredWidth, y*scale + scale/2 + centeredHeight, scale/2)).draw();
           break;
          case "*":
-          (new Object("sprites/box.png", x*scale + centeredWidth, y*scale + centeredHeight, scale)).draw();
+          (new Object(x*scale + centeredWidth, y*scale + centeredHeight, scale, color(98, 26, 165))).draw();
           break;
          case "@":
           player = new Player("sprites/emoji.png", x*scale + centeredWidth, y*scale + centeredHeight, scale);
           player.draw();
           break;
          case "T":
-          (new Object("sprites/boxontarget.png", x*scale + centeredWidth, y*scale + centeredHeight, scale)).draw();
+          (new Object(x*scale + centeredWidth, y*scale + centeredHeight, scale, color(100, 100, 100))).draw();
           break;
          case "P":
           player = new Player("sprites/emoji.png", x*scale + centeredWidth, y*scale + centeredHeight, scale);
