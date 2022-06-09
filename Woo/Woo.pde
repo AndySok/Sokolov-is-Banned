@@ -112,9 +112,13 @@ void keyPressed(){
       move("right");
       break;
     case 'P':
-      STATE = "FINISH";
+      if(STATE.equals("PLAY")){
+        STATE = "FINISH";
+      }
     case 'p':
-      STATE = "FINISH";
+      if(STATE.equals("PLAY")){
+        STATE = "FINISH";
+      }
     case ' ':
       println("RESTART!");
       level = dupliKate(originalLevel);
