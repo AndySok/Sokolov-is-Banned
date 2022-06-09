@@ -11,16 +11,15 @@ class Player{
  }
  
  void draw(){
-   photo.resize(scale, scale);
-   image(photo, x, y);
+   image(photo, x+6, y+4, (width/22), (height/22));
  }
  
  int getX(){
-   return ((int)this.x - centered) / scale; 
+   return (int)this.x / scale; 
  }
  
  int getY(){
-   return ((int)this.y - centered) / scale; 
+   return (int)this.y / scale; 
  }
  
  String getType(){

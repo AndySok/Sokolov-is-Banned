@@ -124,3 +124,16 @@ Andrey and Ziying ::
 - Fixed bug where multiple targets next to each other would be "eaten" by the player
 - Added ten total levels
 ==============================================================
+
+2022-06-08
+--------------------------------------------------------------
+Andrey and Ziying ::
+- Created the start screen
+- Linked maps together
+==============================================================
+
+2022-06-09
+--------------------------------------------------------------
+Andrey and Ziying ::
+
+==============================================================
