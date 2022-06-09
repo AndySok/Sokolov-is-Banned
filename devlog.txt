@@ -138,4 +138,9 @@ between levels
 --------------------------------------------------------------
 Andrey and Ziying ::
 - Adjusted some colors and strokes for the game
+- Tried adding sprites into the game, but had to cut due to performance issues
+- Refactored the entirety of the code; The Woo class now operates as the driver, with all of the game functions happening in the Game() class
+- Amended the class system of objects; Now walls and boxes operate under the Object class, and don't have a getType() method
+- More devtools implemented; pressing on Enter() finishes the level
+- All levels now have the ability to be centered; centering is achieved by adding a X and Y values at the end of each map file
 ==============================================================
