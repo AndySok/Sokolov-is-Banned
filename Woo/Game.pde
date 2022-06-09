@@ -280,23 +280,23 @@ class Game{
       for(int x = 0; x < level[y].length; x++){
         switch(level[y][x]){
          case "X":
-          (new Wall(x*scale + centeredWidth, y*scale + centeredHeight, scale)).draw();
+          (new Object(x*scale + centeredWidth, y*scale + centeredHeight, scale, color(183, 116, 8))).draw();
           break;
          case ".":
           (new Target(x*scale + scale/2 + centeredWidth, y*scale + scale/2 + centeredHeight, scale/2)).draw();
           break;
          case "*":
-          (new Box(x*scale + centeredWidth, y*scale + centeredHeight, scale, 0)).draw();
+          (new Object("sprites/box.png", x*scale + centeredWidth, y*scale + centeredHeight, scale)).draw();
           break;
          case "@":
-          player = new Player("emoji.png", x*scale + centeredWidth, y*scale + centeredHeight, scale);
+          player = new Player("sprites/emoji.png", x*scale + centeredWidth, y*scale + centeredHeight, scale);
           player.draw();
           break;
          case "T":
-          (new Box(x*scale + centeredWidth, y*scale + centeredHeight, scale, 1)).draw();
+          (new Object("sprites/boxontarget.png", x*scale + centeredWidth, y*scale + centeredHeight, scale)).draw();
           break;
          case "P":
-          player = new Player("emoji.png", x*scale + centeredWidth, y*scale + centeredHeight, scale);
+          player = new Player("sprites/emoji.png", x*scale + centeredWidth, y*scale + centeredHeight, scale);
           player.draw();
           break;
         }
