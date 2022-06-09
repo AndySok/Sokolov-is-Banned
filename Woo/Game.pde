@@ -324,7 +324,7 @@ class Game{
 
   String[][] dupliKate(String[][] original){
       String[][] copy = new String[original.length][original[0].length];
-      for(int y = 0; y < original.length-2; y++){
+      for(int y = 0; y < original.length; y++){
         for(int x = 0; x < original[y].length; x++){
           copy[y][x] = original[y][x];
         }
