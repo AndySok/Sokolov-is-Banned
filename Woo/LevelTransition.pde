@@ -24,7 +24,6 @@ class LevelTransition{
     level = levels.get(transition.getLevel()-1); // gets the new level
     originalLevel = game.dupliKate(level);
     levelCounter ++;
-    confirm.rectOver = false;
     STATE = "PLAY";
   }
   
@@ -51,7 +50,7 @@ class LevelTransition{
     text("in Processing", width/2, 400);
     fill(255);
     
-    confirm.draw("START");
+    start.draw("START");
   }
   
   

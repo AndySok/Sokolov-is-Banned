@@ -9,7 +9,7 @@ LinkedList<String[][]> levels;
 LevelTransition transition;
 EndScreen end;
 Counters counters;
-Button confirm;
+Button confirm, start;
 Player player;
 String[][] level;
 String[][] originalLevel;
@@ -22,7 +22,8 @@ void setup(){
  transition = new LevelTransition(fontSizes[0], 1);
  scale = 50;
  counters = new Counters();
- confirm = new Button((width/2+55), 505, scale*4);
+ start = new Button((width/2+55), 505, scale*4);
+ confirm = new Button((width/2-scale*2), 350, scale*4);
  fontSizes[0] = createFont("fonts/Blaka-Regular.ttf", 92);
  fontSizes[1] = createFont("fonts/Roboto-Bold.ttf", 56);
  fontSizes[2] = createFont("fonts/Roboto-Black.ttf", 30);
@@ -104,7 +105,14 @@ void keyPressed(){
  }
 
  void mousePressed() {
+  if (start.rectOver) {
+    transition.levelCounter = 1;
+    counters.keyCounter = 0;
+    transition.nextLevel();
+    start.rectOver = false;
+  }
   if (confirm.rectOver) {
     transition.nextLevel();
+    confirm.rectOver = false;
   }
 }
