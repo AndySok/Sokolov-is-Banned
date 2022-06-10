@@ -124,7 +124,6 @@ void keyPressed(){
       confirm.rectOver = false;
     }
     else if(STATE.equals("COMPLETED")){
-      leaderboard.setYourValue(counters.keyCounter);
       game.createLeaderboard();
       confirm.rectOver = false;
     }
