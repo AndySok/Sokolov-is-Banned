@@ -7,7 +7,7 @@ Game game = new Game();
 String STATE = "START"; 
 LinkedList<String[][]> levels;
 LevelTransition transition;
-EndScreen end;
+Leaderboard leaderboard;
 Counters counters;
 Button confirm, start, home;
 Player player;

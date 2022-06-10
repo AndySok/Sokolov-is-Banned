@@ -19,7 +19,7 @@ class Game{
   }
   
   void endScreen(){
-   end.draw();
+   //end.draw();
   }
   
   void game(){

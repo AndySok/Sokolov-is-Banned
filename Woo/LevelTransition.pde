@@ -21,10 +21,14 @@ class LevelTransition{
   }
   
   void nextLevel(){
-    level = levels.get(transition.getLevel()-1); // gets the new level
-    originalLevel = game.dupliKate(level);
-    levelCounter ++;
-    STATE = "PLAY";
+    if(transition.getLevel() < levels.size()){
+      level = levels.get(transition.getLevel()-1); // gets the new level
+      originalLevel = game.dupliKate(level);
+      levelCounter++;
+      STATE = "PLAY";
+    } //else if(transition.getLevel() == levels.size()) {
+      //STATE = "COMPLETED";
+    //}
   }
   
   void mainMenu(){
