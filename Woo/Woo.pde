@@ -101,6 +101,8 @@ void keyPressed(){
    if(key == ENTER){
      if(STATE.equals("FINISH")){
        transition.nextLevel();
+     } if(STATE.equals("COMPLETED")){
+       game.createLeaderboard();       
      }
    } else if(key == TAB){
      game.createLeaderboard();
