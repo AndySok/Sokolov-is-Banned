@@ -40,7 +40,7 @@ void draw(){
 void keyPressed(){
    switch(key){
     case CODED:
-      if(keyCode == UP){
+      if(keyCode == UP){ // uses the arrow keys
         game.move("up");
       } else if(keyCode == LEFT){
         game.move("left");
@@ -48,8 +48,8 @@ void keyPressed(){
         game.move("down");
       } else if(keyCode == RIGHT){
         game.move("right");
-      }
       break;
+      }
     case 'w':
       game.move("up");
       break;
@@ -79,10 +79,6 @@ void keyPressed(){
         STATE = "FINISH";
       }
     case 'p':
-      if(STATE.equals("PLAY")){
-        STATE = "FINISH";
-      }
-    case ENTER:
       if(STATE.equals("PLAY")){
         STATE = "FINISH";
       }

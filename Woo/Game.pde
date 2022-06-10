@@ -14,7 +14,7 @@ class Game{
   }
   
   void nextLevel(){
-  // background(255);
+   // game.draw(); // update this everytime
    transition.draw();
   }
   
@@ -332,6 +332,7 @@ class Game{
         }
       } return copy;
   }
+ 
   
   //PRECONDITION: file follows the right format
   String[][] parseFile(String fileLocation) {
@@ -355,4 +356,5 @@ class Game{
     }
     return levels;
   }
+  
 }
