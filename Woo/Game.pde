@@ -25,6 +25,7 @@ class Game{
   void game(){
    background(255);
    counters.draw();
+   home.draw("<-");
    game.setupMap(level, scale);
    scale = 30;
   // levelCounter(transition.getLevel());
