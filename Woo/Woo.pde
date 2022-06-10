@@ -48,8 +48,9 @@ void keyPressed(){
         game.move("down");
       } else if(keyCode == RIGHT){
         game.move("right");
-      break;
-      }
+      } else{
+         break; 
+      } break;
     case 'w':
       game.move("up");
       break;
@@ -78,14 +79,17 @@ void keyPressed(){
       if(STATE.equals("PLAY")){
         STATE = "FINISH";
       }
+      break;
     case 'p':
       if(STATE.equals("PLAY")){
         STATE = "FINISH";
       }
+      break;
     case ENTER:
-      if(STATE.equals("PLAY")){
-        game.nextLevel();
+      if(STATE.equals("FINISH")){
+        transition.nextLevel();
       }
+      break;
     case ' ':
       println("RESTART!");
       level = game.dupliKate(originalLevel);
