@@ -29,16 +29,16 @@ OBSTACLES OVERCOME
 2. Pressing two direction keys at the same time would clone the player
     Added a conditional that must also check if the player is still in the same
     position
-3. Accounting for four directions each time
-  Fixed by having move() intake parameters and invoking move() with the said params
-4. Unable to load images to replace primitive sprites
-  Fixed by using PImage, going further into the documentation, and adjusting height
+3. Unable to load images to replace primitive sprites
+  Fixed by using PImage, going further into the documentation, and resizing height
   and width
-5. Multiple issues with boxes and targets being eaten by the Player
+4. Multiple issues with boxes and targets being eaten by the Player
+  Had to account for multiple conditionals
+5. Fixed a bug where moving before the game started would break the game
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<>
+1. Implementing a level selection screen -- we were unable to do it in time
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,17 +49,25 @@ a double String array
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. Decided to instate a leaderboard through using stacks
+1. Decided to instate a leaderboard
 2. Connecting maps using linked lists
+3. Tried adding multiple sprites into the game, but cut because of performance issues
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
-1. Having one person be the driver and having another person exclusively
+1. During a work session, having one person be the driver and having another person exclusively
 account for devlog, README, and the UML diagram makes logging data and the workflow
 overall much more efficient and NEVER results in merge conflicts!!
-
+2. Proofreading code can be tricky, especially if it's dense likes ours
+3. ...leading to the discovery of Apple's iOS 7.0.5 bug that got through PROFESSIONAL
+computer scientists for years and suffered from incomplete proofreading
+4. UML and flowcharts should set a base for your project, but be open to making changes mid-development if
+a better idea or algorithm comes to fruition
+5. A well-developed foundation of your game makes adding on features A LOT easier...
+60% of our time was spent on brainstorming and building the basic mechanics/gameplay
+40% of our time was spent on adding features, such as counter, leaderboard, start menu, and more
 
  ______   ______   __   __   __       ______   _______
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\
@@ -143,4 +151,7 @@ Andrey and Ziying ::
 - Amended the class system of objects; Now walls and boxes operate under the Object class, and don't have a getType() method
 - More devtools implemented; pressing on Enter() finishes the level
 - All levels now have the ability to be centered; centering is achieved by adding a X and Y values at the end of each map file
+- Added the ENTER key functionality -- you can move to the next level by pressing ENTER
+- Created a button
+- Added a leaderboard
 ==============================================================
