@@ -1,21 +1,34 @@
+import java.util.Collections;
+
 class Leaderboard{
   String file;
   int yourValue;
   LinkedList<Integer> leaderboard;
+  String[] newArray;
   Leaderboard(String file, int newVal){
     this.file = file;
     yourValue = newVal;
-    leaderboard = parse(file);
+    leaderboard = parse(file, newVal);
+    newArray = copyOf(leaderboard);
+//    saveStrings("leaderboard", newArray);
   }
   
-  LinkedList<Integer> parse(String file){
+  LinkedList<Integer> parse(String file, int newVal){
     String[] list = loadStrings(file);
     LinkedList<Integer> parsed = new LinkedList<Integer>();
     for(int i=0; i<list.length;i++){
       parsed.add(Integer.parseInt(list[i]));
     }
-//    parsed.sort();
+    parsed.add(newVal);
+    Collections.sort(parsed);
     return parsed;
+  }
+  
+  String[] copyOf(LinkedList<Integer> list){
+    String[] copy = new String[list.size()];
+    for (int i=0 ; i<copy.length; i++){
+      copy[i] = list.get(i).toString();
+    } return copy;
   }
   
   void setYourValue(int val){
@@ -33,11 +46,10 @@ class Leaderboard{
     text("LEADERBOARD", width/2, 100);
     textFont(fontSizes[1]);
     textAlign(LEFT, CENTER);
-    for(int i=0; i<1; i++){
-      for(int j=0; j<5; j++){
-        
+    for(int i=1; i<2; i++){
+      for(int j=1; j<6; j++){
+        text("" + (i+j+1) + ". " + leaderboard.get(i+j), width*1/8 + 200*(i-1), 300);
       }
     }
-//    saveStrings("leaderboard", leaderboard.toArray());
   }
 }
