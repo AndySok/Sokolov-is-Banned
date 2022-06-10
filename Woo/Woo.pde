@@ -84,7 +84,7 @@ void keyPressed(){
       }
     case ENTER:
       if(STATE.equals("PLAY")){
-        STATE = "FINISH";
+        game.nextLevel();
       }
     case ' ':
       println("RESTART!");
