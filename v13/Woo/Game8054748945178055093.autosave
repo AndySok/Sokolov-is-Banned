@@ -12,33 +12,31 @@ class Game{
     originalLevel = game.dupliKate(level);
     transition.draw();
   }
-   
+  
+  void nextLevel(){
+   // game.draw(); // update this everytime
+   transition.draw();
+  }
+  
+  void endScreen(){
+   //end.draw();
+  }
+  
   void game(){
    background(255);
    counters.draw();
    home.draw("<-");
    game.setupMap(level, scale);
    scale = 30;
+  // levelCounter(transition.getLevel());
    if(checkWin()){
-     finishLevel();
+      finishLevel();
+    }
    }
   }
   
-  void nextLevel(){
-   transition.draw();
-  }
- 
-  void leaderboard(){
-   leaderboard.draw(); 
-  }
-  
   void finishLevel(){
-    if(transition.getLevel() <= levels.size()){
-      STATE = "FINISH";
-    } else {
-      STATE = "COMPLETED";
-      println("COMPLETED!");
-    }
+    
   }
   
   boolean checkWin(){

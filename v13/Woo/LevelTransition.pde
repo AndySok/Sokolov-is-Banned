@@ -89,7 +89,7 @@ class LevelTransition{
     
     text("press ENTER to finish the game!", width/2, 250);
     textFont(fontSizes[3]);
-    confirm.draw("go to leaderboard");         
+    confirm.draw("finish game");         
   }
   
   void draw(){

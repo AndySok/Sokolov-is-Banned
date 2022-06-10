@@ -25,7 +25,6 @@ void setup(){
  start = new Button((width/2+55), 505, scale*4, 1);
  confirm = new Button((width/2-scale*2), 350, scale*4, 1);
  home = new Button(scale, scale, scale, 2);
- leaderboard = new Leaderboard("leaderboard", counters.keyCounter);
  fontSizes[0] = createFont("fonts/Blaka-Regular.ttf", 92);
  fontSizes[1] = createFont("fonts/Roboto-Bold.ttf", 56);
  fontSizes[2] = createFont("fonts/Roboto-Black.ttf", 30);
@@ -35,13 +34,13 @@ void setup(){
 void draw(){
   if(STATE.equals("START")){
    game.startMenu();
+  } else if(STATE.equals("FINISH")){
+   game.nextLevel();
+  } else if(STATE.equals("COMPLETED")){
+   game.endScreen();
   } else if(STATE.equals("PLAY")){
    game.game();
-  } else if(STATE.equals("FINISH") || STATE.equals("COMPLETED")){
-   game.nextLevel();
-  } else if(STATE.equals("LEADERBOARD")){
-   game.leaderboard(); 
-  }
+ }
 }
 
 void keyPressed(){
@@ -103,8 +102,6 @@ void keyPressed(){
      if(STATE.equals("FINISH")){
        transition.nextLevel();
      }
-   } else if(key == TAB){
-     STATE = "LEADERBOARD";
    }
  }
 
@@ -120,14 +117,7 @@ void keyPressed(){
     start.rectOver = false;
   }
   if (confirm.rectOver) {
-    if(STATE.equals("FINISH")){
-      transition.nextLevel();
-      confirm.rectOver = false;
-    }
-    else if(STATE.equals("COMPLETED")){
-      leaderboard.setYourValue(counters.keyCounter);
-      STATE = "LEADERBOARD";
-      confirm.rectOver = false;
-    }
+    transition.nextLevel();
+    confirm.rectOver = false;
   }
 }

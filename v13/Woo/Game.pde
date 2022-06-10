@@ -12,24 +12,26 @@ class Game{
     originalLevel = game.dupliKate(level);
     transition.draw();
   }
-   
+  
+  void nextLevel(){
+   // game.draw(); // update this everytime
+   transition.draw();
+  }
+  
+  void endScreen(){
+   transition.draw();
+  }
+  
   void game(){
    background(255);
    counters.draw();
    home.draw("<-");
    game.setupMap(level, scale);
    scale = 30;
+  // levelCounter(transition.getLevel());
    if(checkWin()){
      finishLevel();
    }
-  }
-  
-  void nextLevel(){
-   transition.draw();
-  }
- 
-  void leaderboard(){
-   leaderboard.draw(); 
   }
   
   void finishLevel(){
