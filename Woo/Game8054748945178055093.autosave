@@ -19,7 +19,7 @@ class Game{
   }
   
   void endScreen(){
-   transition.draw();
+   //end.draw();
   }
   
   void game(){
@@ -30,17 +30,13 @@ class Game{
    scale = 30;
   // levelCounter(transition.getLevel());
    if(checkWin()){
-     finishLevel();
+      finishLevel();
+    }
    }
   }
   
   void finishLevel(){
-    if(transition.getLevel() <= levels.size()){
-      STATE = "FINISH";
-    } else {
-      STATE = "COMPLETED";
-      println("COMPLETED!");
-    }
+    
   }
   
   boolean checkWin(){

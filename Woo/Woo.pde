@@ -19,7 +19,7 @@ int scale, centeredWidth, centeredHeight;
 void setup(){
  size(800, 600);
  levels = game.parse();
- transition = new LevelTransition(fontSizes[0], 1);
+ transition = new LevelTransition(fontSizes[0], 0);
  scale = 50;
  counters = new Counters();
  start = new Button((width/2+55), 505, scale*4, 1);
@@ -84,12 +84,12 @@ void keyPressed(){
         break;
       case 'P':
         if(STATE.equals("PLAY")){
-          STATE = "FINISH";
+          game.finishLevel();
         }
         break;
       case 'p':
         if(STATE.equals("PLAY")){
-          STATE = "FINISH";
+          game.finishLevel();
         }
         break;
       case ' ':

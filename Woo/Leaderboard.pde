@@ -4,7 +4,7 @@ class Leaderboard{
     test = 5;
   }
   
-  void draw(){
+  void draw(){   
     transition.completionScreen();
   }
 }

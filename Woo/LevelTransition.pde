@@ -20,15 +20,11 @@ class LevelTransition{
    println("" + current + "/" + levels.size());
   }
   
-  void nextLevel(){
-    if(transition.getLevel() < levels.size()){
+  void nextLevel(){    
       level = levels.get(transition.getLevel()-1); // gets the new level
       originalLevel = game.dupliKate(level);
       levelCounter++;
       STATE = "PLAY";
-    } //else if(transition.getLevel() == levels.size()) {
-      //STATE = "COMPLETED";
-    //}
   }
   
   void mainMenu(){
@@ -87,9 +83,9 @@ class LevelTransition{
     rect(0+(width*1/6), 0+50,width*2/3, width/3);
     
     fill(0);
-    text("LEVEL COMPLETE!", width/2, 130);
+    text("GAME COMPLETE!", width/2, 130);
     textFont(fontSizes[2]);
-    text((levels.size() - this.getLevel()+1) + " levels remaining", width/2, 200);
+    text("NO LEVELS REMAINING!", width/2, 200);
     
     text("press ENTER to finish the game!", width/2, 250);
     textFont(fontSizes[3]);
@@ -101,6 +97,8 @@ class LevelTransition{
       mainMenu(); 
     } else if(STATE.equals("FINISH")){
       completionScreen();
+    } else if(STATE.equals("COMPLETED")){
+      endTransition();
     }
   }
 }
