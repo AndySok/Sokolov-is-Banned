@@ -26,7 +26,6 @@ class LevelTransition{
     levelCounter ++;
     confirm.rectOver = false;
     STATE = "PLAY";
-    println(transition.getLevel());
   }
   
   void mainMenu(){
@@ -56,8 +55,7 @@ class LevelTransition{
   }
   
   
-  void completionScreen(){
-    
+  void completionScreen(){    
      fill(0, 0, 0, 63);
      rect(0, 0, width, height);
    
@@ -73,8 +71,26 @@ class LevelTransition{
     
     text("press ENTER to move on!", width/2, 250);
     textFont(fontSizes[3]);
-    confirm.draw("next level"); 
+    confirm.draw("next level");     
+  }
+  
+  void endTransition(){
+     fill(0, 0, 0, 63);
+     rect(0, 0, width, height);
+   
+    textFont(fontSizes[1]);
+    textAlign(CENTER, CENTER);
+    fill(190, 229, 176); 
+    rect(0+(width*1/6), 0+50,width*2/3, width/3);
     
+    fill(0);
+    text("LEVEL COMPLETE!", width/2, 130);
+    textFont(fontSizes[2]);
+    text((levels.size() - this.getLevel()+1) + " levels remaining", width/2, 200);
+    
+    text("press ENTER to finish the game!", width/2, 250);
+    textFont(fontSizes[3]);
+    confirm.draw("finish game");         
   }
   
   void draw(){
