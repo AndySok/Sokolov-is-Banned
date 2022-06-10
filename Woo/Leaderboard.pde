@@ -10,7 +10,7 @@ class Leaderboard{
     yourValue = newVal;
     leaderboard = parse(file, newVal);
     newArray = copyOf(leaderboard);
-//    saveStrings("leaderboard", newArray);
+    saveStrings("leaderboard", newArray);     
   }
   
   LinkedList<Integer> parse(String file, int newVal){
@@ -35,8 +35,7 @@ class Leaderboard{
     yourValue = val;
   }
   
-  void draw(){
-    
+  void draw(){     
     background(62, 55, 201); // background
     textFont(fontSizes[0]);
     textAlign(CENTER, CENTER);
@@ -44,11 +43,13 @@ class Leaderboard{
     rect(0+(width*1/8), 0+50,width*3/4, height*0.75);
     fill(255);
     text("LEADERBOARD", width/2, 100);
-    textFont(fontSizes[1]);
+    textFont(fontSizes[2]);
     textAlign(LEFT, CENTER);
-    for(int i=1; i<2; i++){
-      for(int j=1; j<6; j++){
-        text("" + (i+j+1) + ". " + leaderboard.get(i+j), width*1/8 + 200*(i-1), 300);
+    for(int i=0; i<2; i++){
+      for(int j=0; j<5; j++){
+        if(leaderboard.get(i*5+j) == yourValue) fill(255, 0, 0);
+        else fill(255);
+        text("" + (i*5+j+1) + ". " + leaderboard.get(i*5+j), width/7 + 70*(i*5), height/3 + 60*(j));
       }
     }
   }

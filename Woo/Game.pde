@@ -28,6 +28,11 @@ class Game{
    transition.draw();
   }
  
+  void createLeaderboard(){
+   leaderboard = new Leaderboard("leaderboard", counters.keyCounter);
+   STATE = "LEADERBOARD";
+  }
+ 
   void leaderboard(){
    leaderboard.draw(); 
   }

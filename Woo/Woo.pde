@@ -25,7 +25,6 @@ void setup(){
  start = new Button((width/2+55), 505, scale*4, 1);
  confirm = new Button((width/2-scale*2), 350, scale*4, 1);
  home = new Button(scale, scale, scale, 2);
- leaderboard = new Leaderboard("leaderboard", counters.keyCounter);
  fontSizes[0] = createFont("fonts/Blaka-Regular.ttf", 92);
  fontSizes[1] = createFont("fonts/Roboto-Bold.ttf", 56);
  fontSizes[2] = createFont("fonts/Roboto-Black.ttf", 30);
@@ -104,7 +103,7 @@ void keyPressed(){
        transition.nextLevel();
      }
    } else if(key == TAB){
-     STATE = "LEADERBOARD";
+     game.createLeaderboard();
    }
  }
 
@@ -126,7 +125,7 @@ void keyPressed(){
     }
     else if(STATE.equals("COMPLETED")){
       leaderboard.setYourValue(counters.keyCounter);
-      STATE = "LEADERBOARD";
+      game.createLeaderboard();
       confirm.rectOver = false;
     }
   }
