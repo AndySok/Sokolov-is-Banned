@@ -18,6 +18,10 @@ class Game{
    transition.draw();
   }
   
+  void endScreen(){
+   end.draw(); 
+  }
+  
   void game(){
    background(255);
    game.setupMap(level, scale);

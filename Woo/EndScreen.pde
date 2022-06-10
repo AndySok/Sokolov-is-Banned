@@ -1,0 +1,5 @@
+class EndScreen{
+  void draw(){
+    
+  }
+}
