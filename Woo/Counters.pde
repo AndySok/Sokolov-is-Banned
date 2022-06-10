@@ -18,8 +18,9 @@ class Counters{
     fill(0);
     textFont(fontSizes[2]);
     if(transition.getLevel() == 2){
-      textAlign(LEFT, CENTER);
-      text("use arrow keys to move", width-350, height-30);
+      textAlign(RIGHT, CENTER);
+      text("use arrow keys to move", width-10, height-60);
+      text("press SPACE to restart", width-10, height-30);
     }
     textAlign(LEFT, CENTER);
     text("Moves: " + MoveCounter, 10, height-60);

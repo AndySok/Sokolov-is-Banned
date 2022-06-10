@@ -47,7 +47,7 @@ class LevelTransition{
     fill(226, 255, 152);
     text("a SOKOBAN implementation", width/2, 360);
     textAlign(LEFT, CENTER);
-    text("in Processing", width/2, 400);
+    text("in Processing", width/2+7, 400);
     fill(255);
     
     start.draw("START");
