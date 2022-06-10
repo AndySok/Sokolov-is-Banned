@@ -82,6 +82,10 @@ void keyPressed(){
       if(STATE.equals("PLAY")){
         STATE = "FINISH";
       }
+    case ENTER:
+      if(STATE.equals("PLAY")){
+        STATE = "FINISH";
+      }
     case ' ':
       println("RESTART!");
       level = game.dupliKate(originalLevel);
