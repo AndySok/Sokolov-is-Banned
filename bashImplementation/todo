@@ -1,5 +1,6 @@
 to-do:
 - **basic gameplay loop**
+- fix parse function
 - reformat strings of characters into a list 
 - home/restart buttons
 - counters
