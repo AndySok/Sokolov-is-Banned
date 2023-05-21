@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Game{
   //TODO: reformat into a list
@@ -9,32 +10,34 @@ public class Game{
   String PLAYERTARGET = "P";
   String BOXTARGET = "T";   
 
-  void startMenu(){
+/*  void startMenu(){
     level = levels.get(transition.getLevel()); //CHANGE LEVEL
     originalLevel = game.dupliKate(level);
   }
-   
+*/
+
   void gameLoop(){
    System.out.println(Arrays.deepToString(level));
-   game.setupMap(level, scale);
+//   game.setupMap(level, scale);
    if(checkWin()){
      finishLevel();
    }
   }
   
+/*
   void nextLevel(){
    transition.draw();
   }
- 
+*/
+
+/*
   void createLeaderboard(){
    leaderboard = new Leaderboard("leaderboard", counters.keyCounter);
    STATE = "LEADERBOARD";
   }
- 
-  void leaderboard(){
-   leaderboard.draw(); 
-  }
-  
+*/
+
+/*
   void finishLevel(){
     if(transition.getLevel() <= levels.size()){
       STATE = "FINISH";
@@ -43,7 +46,8 @@ public class Game{
       println("COMPLETED!");
     }
   }
-  
+*/
+
   boolean checkWin(){
    for(int y=0;y<level.length-2;y++){
     for(int x=0;x<level[0].length;x++){
@@ -368,7 +372,7 @@ public class Game{
   
   LinkedList<String[][]> parse(){
     LinkedList<String[][]> levels = new LinkedList<String[][]>();
-    for(int i=1; i<=listPaths("levels").length; i++){
+    for(int i=1; i<=10; i++){
       levels.add(parseFile("levels/" + i));
     }
     return levels;
